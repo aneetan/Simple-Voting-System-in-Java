@@ -67,10 +67,14 @@ public class HelloServlet extends HttpServlet {
         //for login of user using result set from database
         if (page.equalsIgnoreCase("loginUser")) {
             String email = request.getParameter("email");
-            String password = PasswordHashing.hashPassword(request.getParameter("password"));
+//            String password = PasswordHashing.hashPassword(request.getParameter("password"));
+            String password = request.getParameter("password");
+
 
             //Admin login
-            if(email.equals("admin@gmail.com") && password.equals("admin@123")){
+            if(email.equalsIgnoreCase("admin@gmail.com") && password.equalsIgnoreCase("admin@123")){
+                HttpSession session = request.getSession();
+                session.setAttribute("email", email);
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("adminDash.jsp");
                 requestDispatcher.forward(request, response);
             } else {
@@ -139,6 +143,42 @@ public class HelloServlet extends HttpServlet {
         //display forgot password page
         if (page.equalsIgnoreCase("forgotpw")) {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("forgotpw.jsp");
+            requestDispatcher.forward(request, response);
+        }
+
+        //display admin dashboard
+        if (page.equalsIgnoreCase("dashboard")) {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("adminDash.jsp");
+            requestDispatcher.forward(request, response);
+        }
+
+        //display candidate list
+        if (page.equalsIgnoreCase("seecandidate")) {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("candidatelist.jsp");
+            requestDispatcher.forward(request, response);
+        }
+
+        //display add election form
+        if (page.equalsIgnoreCase("addElection")) {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("addElection.jsp");
+            requestDispatcher.forward(request, response);
+        }
+
+        //display add candidate form
+        if (page.equalsIgnoreCase("addCandidate")) {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("addCandidate.jsp");
+            requestDispatcher.forward(request, response);
+        }
+
+        //display add candidate form
+        if (page.equalsIgnoreCase("userList")) {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("userlist.jsp");
+            requestDispatcher.forward(request, response);
+        }
+
+        //display add candidate form
+        if (page.equalsIgnoreCase("resultAdmin")) {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("resultAdmin.jsp");
             requestDispatcher.forward(request, response);
         }
     }
