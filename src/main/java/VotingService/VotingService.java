@@ -139,6 +139,30 @@ public class VotingService {
         }
     }
 
+    public List<Election> getElectionList(){
+        ArrayList<Election> electionList = new ArrayList<>();
+        String query = "select * from election";
+        PreparedStatement preparedStatement = new DBConnection().getStatement(query);
+
+        try{
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while( resultSet.next()){
+                Election election = new Election();
+
+                election.setEId(resultSet.getInt("EId"));
+                election.setImageFileName(resultSet.getString("imageFileName"));
+                election.setElectionName(resultSet.getString("electionName"));
+                election.setCandidacy(resultSet.getString("candidacy"));
+                election.setElectionDate(resultSet.getString("electionDate"));
+
+                electionList.add(election);
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return electionList;
+    }
     public List<Candidate> getCandidateList(){
         ArrayList<Candidate> candidateList = new ArrayList<>();
         String query = "select * from candidate";
@@ -154,7 +178,7 @@ public class VotingService {
                 candidate.setCandidateProfile(resultSet.getString("candidateProfile"));
                 candidate.setFullNameCandidate(resultSet.getString("fullNameCandidate"));
                 candidate.setEmailCandidate(resultSet.getString("emailCandidate"));
-                candidate.setAgeCandidate(Integer.parseInt(resultSet.getString("ageCandidate")));
+                candidate.setAgeCandidate(resultSet.getInt("ageCandidate"));
                 candidate.setAddressCandidate(resultSet.getString("addressCandidate"));
                 candidate.setGenderCandidate(resultSet.getString("genderCandidate"));
                 candidate.setCandidate(resultSet.getString("candidate"));
@@ -168,4 +192,92 @@ public class VotingService {
         }
         return candidateList;
     }
+
+    public List<VotingSystem> getUserList(){
+        ArrayList<VotingSystem> userList = new ArrayList<>();
+        String query = "select * from voter";
+        PreparedStatement preparedStatement = new DBConnection().getStatement(query);
+
+        try{
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while( resultSet.next()){
+                VotingSystem votingSystem = new VotingSystem();
+
+                votingSystem.setId(resultSet.getInt("id"));
+                votingSystem.setUserProfile(resultSet.getString("userProfile"));
+                votingSystem.setFullName(resultSet.getString("fullName"));
+                votingSystem.setEmail(resultSet.getString("email"));
+                votingSystem.setDob(resultSet.getString("dob"));
+                votingSystem.setAddress(resultSet.getString("address"));
+                votingSystem.setGender(resultSet.getString("gender"));
+                votingSystem.setCitizenNo(resultSet.getString("citizenNo"));
+                votingSystem.setIssueDistrict(resultSet.getString("issueDistrict"));
+                votingSystem.setIssueDate(resultSet.getString("issueDate"));
+
+
+                userList.add(votingSystem);
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return userList;
+    }
+
+    public VotingSystem userDetails(int id){
+        String query = "Select * from voter where id =?";
+        PreparedStatement preparedStatement = new DBConnection().getStatement(query);
+        VotingSystem votingSystem = new VotingSystem();
+
+
+        try{
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while( resultSet.next()){
+                votingSystem.setId(resultSet.getInt("id"));
+                votingSystem.setUserProfile(resultSet.getString("userProfile"));
+                votingSystem.setFullName(resultSet.getString("fullName"));
+                votingSystem.setEmail(resultSet.getString("email"));
+                votingSystem.setDob(resultSet.getString("dob"));
+                votingSystem.setAddress(resultSet.getString("address"));
+                votingSystem.setGender(resultSet.getString("gender"));
+                votingSystem.setCitizenNo(resultSet.getString("citizenNo"));
+                votingSystem.setIssueDistrict(resultSet.getString("issueDistrict"));
+                votingSystem.setIssueDate(resultSet.getString("issueDate"));
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return votingSystem;
+    }
+
+    public Candidate candidateDetails(int canId){
+        String query = "Select * from candidate where canId =?";
+        PreparedStatement preparedStatement = new DBConnection().getStatement(query);
+        Candidate candidate = new Candidate();
+
+
+        try{
+            preparedStatement.setInt(1, canId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while( resultSet.next()){
+                candidate.setCanId(resultSet.getInt("canId"));
+                candidate.setCandidateProfile(resultSet.getString("candidateProfile"));
+                candidate.setFullNameCandidate(resultSet.getString("fullNameCandidate"));
+                candidate.setEmailCandidate(resultSet.getString("emailCandidate"));
+                candidate.setAgeCandidate(resultSet.getInt("ageCandidate"));
+                candidate.setAddressCandidate(resultSet.getString("addressCandidate"));
+                candidate.setGenderCandidate(resultSet.getString("genderCandidate"));
+                candidate.setCandidate(resultSet.getString("candidate"));
+                candidate.setExperience(resultSet.getString("experience"));
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return candidate;
+    }
+
+
 }

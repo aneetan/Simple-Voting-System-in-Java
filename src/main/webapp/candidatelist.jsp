@@ -66,7 +66,7 @@
               <td> ${candidate.addressCandidate}</td>
               <td> ${candidate.genderCandidate}</td>
 
-              <td> <a href="vote?page=candidateDetailsAdmin"> See details</a> </td>
+              <td> <a href="vote?page=candidateDetailsAdmin&canId=${candidate.canId}"> See details</a> </td>
 
             </tr>
             </c:forEach>

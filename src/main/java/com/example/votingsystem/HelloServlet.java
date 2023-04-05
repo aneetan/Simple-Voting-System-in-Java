@@ -224,6 +224,17 @@ public class HelloServlet extends HttpServlet {
 
         //display admin dashboard
         if (page.equalsIgnoreCase("dashboard")) {
+            Election election = new Election();
+
+            List<Election> electionList = new VotingService().getElectionList();   //returned in list
+            request.setAttribute("election", election);
+            request.setAttribute("electionList", electionList);
+
+            Candidate candidate = new Candidate();
+            List<Candidate> candidateList = new VotingService().getCandidateList();   //returned in list
+            request.setAttribute("candidate", candidate);
+            request.setAttribute("candidateList", candidateList);
+
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("adminDash.jsp");
             requestDispatcher.forward(request, response);
         }
@@ -286,9 +297,27 @@ public class HelloServlet extends HttpServlet {
             requestDispatcher.forward(request, response);
         }
 
-        //display add candidate form
+
+        //display user list
         if (page.equalsIgnoreCase("userList")) {
+            VotingSystem votingSystem = new VotingSystem();
+
+            List<VotingSystem> userList = new VotingService().getUserList();   //returned in list
+            request.setAttribute("votingSystem", votingSystem);
+            request.setAttribute("userList", userList);
+
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("userlist.jsp");
+            requestDispatcher.forward(request, response);
+        }
+
+        //see user details
+        if (page.equalsIgnoreCase("userDetailsAdmin")) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            VotingSystem votingSystem = new VotingService().userDetails(id);
+
+            request.setAttribute("votingSystem", votingSystem);
+
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("userDetailsAdmin.jsp");
             requestDispatcher.forward(request, response);
         }
 
@@ -300,9 +329,15 @@ public class HelloServlet extends HttpServlet {
 
         //see candidate details
         if (page.equalsIgnoreCase("candidateDetailsAdmin")) {
+            int id = Integer.parseInt(request.getParameter("canId"));
+            Candidate candidate = new VotingService().candidateDetails(id);
+
+            request.setAttribute("candidate", candidate);
+
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("candidateDetailsAdmin.jsp");
             requestDispatcher.forward(request, response);
         }
+
 
         //exit candidate profile
         if (page.equalsIgnoreCase("cancelAdmin")) {
@@ -326,6 +361,12 @@ public class HelloServlet extends HttpServlet {
 //--------------------------------------User Panel------------------------------------------------
         //display user landing page
         if (page.equalsIgnoreCase("election")) {
+            Election election = new Election();
+
+            List<Election> electionList = new VotingService().getElectionList();   //returned in list
+            request.setAttribute("election", election);
+            request.setAttribute("electionList", electionList);
+
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("landing.jsp");
             requestDispatcher.forward(request, response);
         }

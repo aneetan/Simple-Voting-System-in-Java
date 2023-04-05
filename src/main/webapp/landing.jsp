@@ -5,6 +5,7 @@
   Time: 11:41 PM
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -16,6 +17,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/electionCard.css">
 
+    <anyxmlelement xmlns:c="http://java.sun.com/jsp/jstl/core" />
 
     <!-- Boxicon link -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -34,14 +36,16 @@
     </div>
     <div class="election-card" style="margin: 10px 20px 0 50px" >
         <div class="row row-cols-1 row-cols-md-2 g-4">
+            <c:forEach items="${electionList}" var="election">
+
             <div class="col">
                 <div class="card">
-                    <img src="img/election.png" class="card-img-top" alt="...">
+                    <img src="C://Users//DELL//IdeaProjects//VotingSystem//src//main//webapp//uploadimage//${election.imageFileName}" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">Ongoing Election</h5>
-                        <p class="card-text"> For semester II Class Representative </p>
+                        <h5 class="card-title">${election.electionName}</h5>
+                        <p class="card-text"> ${election.candidacy} </p>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item"> <i class='bx bx-calendar-alt'></i> 2022-02-23</li>
+                            <li class="list-group-item"> <i class='bx bx-calendar-alt'></i> ${election.electionDate}</li>
                         </ul>
                         <div class="card-body">
                             <a href="#" class="card-link">See Details</a>
@@ -49,6 +53,8 @@
                     </div>
                 </div>
             </div>
+            </c:forEach>
+
         </div>
     </div>
 </body>

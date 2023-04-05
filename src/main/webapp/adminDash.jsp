@@ -5,11 +5,14 @@
   Time: 10:38 AM
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <anyxmlelement xmlns:c="http://java.sun.com/jsp/jstl/core" />
+
 
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
@@ -55,7 +58,7 @@
                     <i class='bx bxs-message-square-check'></i>
                     <span class="text">
                             <h3>2</h3>
-                            <p>Elections</p>
+                            <p>Elections Held</p>
                         </span>
                 </li>
             </ul>
@@ -77,14 +80,19 @@
                         </tr>
                         </thead>
                         <tbody>
+                        <c:forEach items="${candidateList}" var="candidate">
+
                         <tr>
                             <td>
-                                <img src="img/people.png">
-                                <p>John Doe</p>
+                                <img src="C://Users//DELL//IdeaProjects//VotingSystem//src//main//webapp//candidateProfile//${candidate.candidateProfile}">
+                                <p>${candidate.fullNameCandidate}</p>
                             </td>
-                            <td>23</td>
-                            <td><span class="status completed"> First Sem</span></td>
+                            <td> ${candidate.ageCandidate}</td>
+
+                            <td><span class="status completed"> ${candidate.candidate}</span></td>
                         </tr>
+
+                        </c:forEach>
                         </tbody>
                     </table>
                 </div>
@@ -93,19 +101,23 @@
                         <h3>Recent Elections</h3>
                         <i class='bx bx-plus' ></i>
                     </div>
+
+                    <c:forEach items="${electionList}" var="election">
+
                     <div class="card" style="width: 15rem;">
-                        <img src="img/election.png" class="card-img-top" alt="election-img">
+                        <img src="C://Users//DELL//IdeaProjects//VotingSystem//src//main//webapp//uploadimage//${election.imageFileName}" class="card-img-top" alt="election-img">
                         <div class="card-body">
-                            <h5 class="card-title">Ongoing Election</h5>
-                            <p class="card-text">For semester II Class Representative</p>
+                            <h5 class="card-title"> ${election.electionName}</h5>
+                            <p class="card-text">${election.candidacy}</p>
                         </div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item"> 2022-02-23</li>
+                            <li class="list-group-item"> ${election.electionDate}</li>
                         </ul>
                         <div class="card-body">
-                            <a href="vote?page=electionDetails" class="card-link">See Details</a>
+                            <a href="vote?page=deleteElection" class="card-link">Delete Election</a>
                         </div>
                     </div>
+                    </c:forEach>
                 </div>
             </div>
         </main>

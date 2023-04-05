@@ -5,11 +5,14 @@
   Time: 12:32 AM
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <anyxmlelement xmlns:c="http://java.sun.com/jsp/jstl/core" />
+
 
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
@@ -51,19 +54,23 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>
-                                <img src="img/people.png">
-                                John Doe
-                            </td>
-                            <td>temp@gmail.com</td>
-                            <td> 2014-03-02</td>
-                            <td> Syangja</td>
-                            <td> Female</td>
 
-                            <td> <a href=""> See details</a> </td>
+                        <c:forEach items="${userList}" var="user">
+                            <tr>
+                                <td>
+                                    <img src="C://Users//DELL//IdeaProjects//VotingSystem//src//main//webapp//userProfile//${user.userProfile}">
+                                    ${user.fullName}
+                                </td>
+                                <td>${user.email}</td>
+                                <td> ${user.dob}</td>
+                                <td> ${user.address}</td>
+                                <td> ${user.gender}</td>
 
-                        </tr>
+                                <td> <a href="vote?page=userDetailsAdmin&id=${user.id}"> See details</a> </td>
+
+                            </tr>
+                        </c:forEach>
+
                         </tbody>
                     </table>
                 </div>

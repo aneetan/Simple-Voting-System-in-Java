@@ -5,12 +5,14 @@
   Time: 5:17 PM
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <anyxmlelement xmlns:c="http://java.sun.com/jsp/jstl/core" />
 
     <link rel="stylesheet" href="css/candidateProfile.css">
 
@@ -24,9 +26,9 @@
     <div class="wrapper">
         <div class="left">
 
-            <img src="img/pro1.jpg" alt="user" width="100">
-            <h4>Alex William</h4>
-            <p>Candidate for Semester II(A)</p>
+            <img src="C://Users//DELL//IdeaProjects//VotingSystem//src//main//webapp//candidateProfile//${candidate.candidateProfile}" alt="user" width="100">
+            <h4> ${candidate.fullNameCandidate}</h4>
+            <p>${candidate.candidate}</p>
 
         </div>
         <div class="right">
@@ -36,11 +38,11 @@
                 <div class="info_data">
                     <div class="data">
                         <h4>Email</h4>
-                        <p>alex@gmail.com</p>
+                        <p>${candidate.emailCandidate}</p>
                     </div>
                     <div class="data">
                         <h4>Age</h4>
-                        <p>24</p>
+                        <p>${candidate.ageCandidate}</p>
                     </div>
 
                 </div>
@@ -48,11 +50,11 @@
                 <div class="info_data">
                     <div class="data">
                         <h4>Address</h4>
-                        <p>Syangja</p>
+                        <p>${candidate.addressCandidate}</p>
                     </div>
                     <div class="data">
                         <h4>Gender</h4>
-                        <p>Female</p>
+                        <p>${candidate.genderCandidate}</p>
                     </div>
 
                 </div>
@@ -61,7 +63,7 @@
             <div class="projects">
                 <h3>Past Works</h3>
                 <div class="projects_data">
-                    <p> -Learning as a student and worked as ambassdor</p>
+                    <p> ${candidate.experience}</p>
                 </div>
             </div>
 

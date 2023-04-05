@@ -28,7 +28,7 @@
         <div class="card-body">
           <img src="img/pro2.jpg" alt="profile" width="150">
           <div class="user-content">
-            <h3> Anita Neupane</h3>
+            <h3> ${votingSystem.fullName}</h3>
             <p> User</p>
             <hr>
             <a href=""> Delete User </a>
@@ -45,39 +45,39 @@
           <h1 class="m-3 pt-3"> About</h1>
         </div>
         <div class="card-body">
-          <div class="row">
-            <div class="col-md-3">
-              <h5> Full Name</h5>
-            </div>
-            <div class="col-md-9 text-secondary"> Anita Neupane </div>
-          </div>
-          <hr>
+<%--          <div class="row">--%>
+<%--            <div class="col-md-3">--%>
+<%--              <h5> Full Name</h5>--%>
+<%--            </div>--%>
+<%--            <div class="col-md-9 text-secondary"> ${votingSystem.fullName} </div>--%>
+<%--          </div>--%>
+<%--          <hr>--%>
           <div class="row">
             <div class="col-md-3">
               <h5> Email</h5>
             </div>
-            <div class="col-md-9 text-secondary"> temp@gmail.com </div>
+            <div class="col-md-9 text-secondary"> ${votingSystem.email} </div>
           </div>
           <hr>
           <div class="row">
             <div class="col-md-3">
               <h5> DOB</h5>
             </div>
-            <div class="col-md-9 text-secondary"> 2004-05-03</div>
+            <div class="col-md-9 text-secondary"> ${votingSystem.dob}</div>
           </div>
           <hr>
           <div class="row">
             <div class="col-md-3">
               <h5> Address</h5>
             </div>
-            <div class="col-md-9 text-secondary"> Kathmandu</div>
+            <div class="col-md-9 text-secondary"> ${votingSystem.address}</div>
           </div>
           <hr>
           <div class="row">
             <div class="col-md-3">
               <h5> Gender</h5>
             </div>
-            <div class="col-md-9 text-secondary"> Female </div>
+            <div class="col-md-9 text-secondary"> ${votingSystem.gender} </div>
           </div>
 
 
@@ -94,21 +94,21 @@
             <div class="col-md-3">
               <h5> Citizenship Number</h5>
             </div>
-            <div class="col-md-9 text-secondary"> 123456789 </div>
+            <div class="col-md-9 text-secondary"> ${votingSystem.citizenNo} </div>
           </div>
           <hr>
           <div class="row">
             <div class="col-md-3">
               <h5> Issued District</h5>
             </div>
-            <div class="col-md-9 text-secondary"> Syangja </div>
+            <div class="col-md-9 text-secondary"> ${votingSystem.issueDistrict} </div>
           </div>
           <hr>
           <div class="row">
             <div class="col-md-3">
               <h5> Issued Date</h5>
             </div>
-            <div class="col-md-9 text-secondary"> 2004-05-03</div>
+            <div class="col-md-9 text-secondary"> ${votingSystem.issueDate}</div>
           </div>
 
 
