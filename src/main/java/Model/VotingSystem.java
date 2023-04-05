@@ -5,6 +5,7 @@ public class VotingSystem {
     private String dob;
     private String email;
     private String password;
+    private String userProfile;
     private String fullName;
     private String address;
     private String gender;
@@ -42,6 +43,14 @@ public class VotingSystem {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getUserProfile() {
+        return userProfile;
+    }
+
+    public void setUserProfile(String userProfile) {
+        this.userProfile = userProfile;
     }
 
     public String getFullName() {

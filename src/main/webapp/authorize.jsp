@@ -24,16 +24,21 @@
 
 <body style="background-image:linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(15, 71, 193, 0.73)),
     url('img/vote.jpg'); background-size: cover;">
-<div class="container" style="background-color: #fff;">
+<div class="container" style="background-color: #fff; height: 600px;">
     <header>Enter Details for verification</header>
     <p style="color: #707070"> By submitting this form you agree to the <a style="text-decoration: none;" href="vote?page=terms"> Terms and Conditions.</a></p>
 
-    <form action="vote?page=authorizeUser"  method="post" id="authorizeForm">
+    <form action="vote?page=authorizeUser"  method="post" id="authorizeForm" enctype="multipart/form-data" style="min-height: 400px">
         <input type="hidden" name="newEmail" value="${votingSystem.email}">
         <input type="hidden" name="newDob" value="${votingSystem.dob}">
         <input type="hidden" name="newPassword" value="${votingSystem.password}">
 
         <div class="form first">
+            <div class="photo-upload" style="text-align: center;
+    margin-bottom: 4px;">
+                <img src="img/img.png" alt="Choose photo" style="height: 60px; width: 60px; border-radius: 50%"> <br>
+                <input type="file" id="profileUser" class="img-file" name="userProfile">
+            </div>
             <div class="details personal">
                 <span class="title">Personal Details</span>
 
@@ -89,5 +94,15 @@
         </div>
     </form>
 </div>
+
+<script>
+    //changing the image to file option
+    const img = document.getElementById("profileUser");
+    input = document.querySelector("input");
+
+    input.addEventListener("change", () => {
+        img.src = URL.createObjectURL(input.files[0]);
+    })
+</script>
 </body>
 </html>

@@ -29,19 +29,19 @@
     <a href="#" class="nav-branding"><img src="img/votelogo.png" alt="logo" width="40px"> VoteNow</a>
     <ul class="nav-menu">
       <li class="nav-item">
-        <a href="#" class="nav-link" style="color: white ;">Election</a>
+        <a href="vote?page=election" class="nav-link" style="color: white ;">Election</a>
       </li>
       <li class="nav-item">
-        <a href="#" class="nav-link" style="color: white ;" >Rules</a>
+        <a href="vote?page=rules" class="nav-link" style="color: white ;" >Rules</a>
       </li>
       <li class="nav-item">
-        <a href="#" class="nav-link" style="color: white ;" >Vote</a>
+        <a href="vote?page=candidateCard" class="nav-link" style="color: white ;" >Vote</a>
       </li>
       <li class="nav-item">
-        <a href="#" class="nav-link" style="color: white ;">View Result</a>
+        <a href="vote?page=resultUser" class="nav-link" style="color: white ;">View Result</a>
       </li>
       <li class="nav-item">
-        <a href="#" class="nav-link" style="color: white ;" >Profile</a>
+        <a href="vote?page=userProfile" class="nav-link" style="color: white ;" >Profile</a>
       </li>
 
     </ul>

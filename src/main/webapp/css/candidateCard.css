@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+body{
+    background: #fafafa;
+}
+.profile-area{
+    padding: 80px 0;
+}
+.card{
+    box-shadow: 0 0 40px rgba(218, 210, 210, 0.35);
+    overflow: hidden;
+    border-radius: 15px;
+    align-items: center;
+    padding-bottom: 18px;
+    justify-content: center;
+}
+.img1{
+    background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(15, 71, 193, 0.73)), url('../img/bg2.jpg');
+    background-size: cover;
+    height: 200px;
+    width: 100%;
+}
+.img2 img{
+    position: relative;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 1;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    border: 7px solid #0080ff;
+    margin-top: -80px;
+}
+.main-text{
+    text-align: center;
+}
+.main-text h2{
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 20px;
+    margin-top: 7px;
+}
+.main-text p{
+    font-size: 16px;
+    margin: 12px;
+}
+.btn-vote{
+    background-color: #0080ff;
+    color: #fafafa;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 150px;
+    margin-top: 12px;
+}
+.card a:hover{
+    text-decoration: none;
+}
+
+hr{
+    width: 100%;
+    color: #0080ff;
+    padding: 1px;
+}
+.progress{
+    width: 75%;
+}
+

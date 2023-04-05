@@ -71,15 +71,19 @@
         </main>
     </section>
 
-<%--    <nav aria-label="Page navigation example">--%>
-<%--        <ul class="pagination">--%>
-<%--            <li class="page-item"><a class="page-link" href="#">Previous</a></li>--%>
-<%--            <li class="page-item"><a class="page-link" href="#">1</a></li>--%>
-<%--            <li class="page-item"><a class="page-link" href="#">2</a></li>--%>
-<%--            <li class="page-item"><a class="page-link" href="#">3</a></li>--%>
-<%--            <li class="page-item"><a class="page-link" href="#">Next</a></li>--%>
-<%--        </ul>--%>
-<%--    </nav>--%>
+    <nav aria-label="Page navigation example" style="margin: 300px 12px 0 0;">
+        <ul class="pagination justify-content-end">
+            <li class="page-item disabled">
+                <a class="page-link" href="#" style="background: #d1d0df;" tabindex="-1" aria-disabled="true">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link" style="background: #d1d0df;" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" style="background: #d1d0df;" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" style="background: #d1d0df;" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#" style="background: #d1d0df;">Next</a>
+            </li>
+        </ul>
+    </nav>
 
 
     <script src="script.js"></script>

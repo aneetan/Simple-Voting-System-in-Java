@@ -1,18 +1,27 @@
 package com.example.votingsystem;
 
 import HashPassword.PasswordHashing;
+import Model.Candidate;
+import Model.Election;
 import Model.VotingSystem;
 import VotingService.VotingService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
 
+//@MultipartConfig
+@MultipartConfig(
+        fileSizeThreshold = 1024 * 1024 * 10, // 2MB
+        maxFileSize = 1024 * 1024 * 10,      // 10MB
+        maxRequestSize = 1024 * 1024 * 50    // 50MB
+)
 @WebServlet(name = "HelloServlet", urlPatterns = "/vote")
 public class HelloServlet extends HttpServlet {
     private String message;
@@ -29,7 +38,10 @@ public class HelloServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         response.setContentType("text/html");
+
         String page = request.getParameter("page");
+
+//--------------------------------------Registration and Login------------------------------------------------
 
         //for registering new user
         if (page.equalsIgnoreCase("registerUser")) {
@@ -47,6 +59,25 @@ public class HelloServlet extends HttpServlet {
         if (page.equalsIgnoreCase("authorizeUser")) {
             VotingSystem votingSystem = (VotingSystem) request.getSession().getAttribute("votingSystem");
 
+            Part file = request.getPart("userProfile");
+            String imageFileName = file.getSubmittedFileName();
+
+            String uploadPath = "C://Users//DELL//IdeaProjects//VotingSystem//src//main//webapp//userProfile//" + imageFileName;
+
+            try{
+                FileOutputStream fileOutputStream = new FileOutputStream(uploadPath);
+                InputStream inputStream = file.getInputStream();
+
+                byte[] data = new byte[inputStream.available()];
+                inputStream.read(data);
+                fileOutputStream.write(data);
+                fileOutputStream.close();
+
+                votingSystem.setUserProfile(imageFileName);
+
+            } catch (Exception e){
+                e.printStackTrace();
+            }
             votingSystem.setEmail(request.getParameter("newEmail"));
             votingSystem.setDob(request.getParameter("newDob"));
             votingSystem.setPassword(request.getParameter("newPassword"));
@@ -67,12 +98,13 @@ public class HelloServlet extends HttpServlet {
         //for login of user using result set from database
         if (page.equalsIgnoreCase("loginUser")) {
             String email = request.getParameter("email");
-//            String password = PasswordHashing.hashPassword(request.getParameter("password"));
-            String password = request.getParameter("password");
+            String password = PasswordHashing.hashPassword(request.getParameter("password"));
+            String adminPassword = PasswordHashing.hashPassword("admin@123");
+
 
 
             //Admin login
-            if(email.equalsIgnoreCase("admin@gmail.com") && password.equalsIgnoreCase("admin@123")){
+            if(email.equalsIgnoreCase("admin@gmail.com") && password.equalsIgnoreCase(adminPassword)){
                 HttpSession session = request.getSession();
                 session.setAttribute("email", email);
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("adminDash.jsp");
@@ -146,6 +178,50 @@ public class HelloServlet extends HttpServlet {
             requestDispatcher.forward(request, response);
         }
 
+//--------------------------------------Admin Panel------------------------------------------------
+        //display add election form
+        if (page.equalsIgnoreCase("addElection")) {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("addElection.jsp");
+            requestDispatcher.forward(request, response);
+        }
+
+        //to add election from admin
+        if (page.equalsIgnoreCase("addElectionDetails")) {
+
+            Election election = new Election();
+
+            Part file = request.getPart("profile");
+            String imageFileName = file.getSubmittedFileName();
+
+            String uploadPath = "C://Users//DELL//IdeaProjects//VotingSystem//src//main//webapp//uploadimage//" + imageFileName;
+
+            try{
+                FileOutputStream fileOutputStream = new FileOutputStream(uploadPath);
+                InputStream inputStream = file.getInputStream();
+
+                byte[] data = new byte[inputStream.available()];
+                inputStream.read(data);
+                fileOutputStream.write(data);
+                fileOutputStream.close();
+
+//                election.setImageFileName(fileOutputStream);
+                election.setImageFileName(imageFileName);
+
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+
+            election.setElectionName(request.getParameter("electionTitle"));
+            election.setCandidacy(request.getParameter("candidacy"));
+            election.setElectionDate(request.getParameter("electionDate"));
+
+            // executing query with the value generated by form
+            new VotingService().addElection(election);
+
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("addCandidate.jsp");
+            requestDispatcher.forward(request, response);
+        }
+
         //display admin dashboard
         if (page.equalsIgnoreCase("dashboard")) {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("adminDash.jsp");
@@ -154,19 +230,59 @@ public class HelloServlet extends HttpServlet {
 
         //display candidate list
         if (page.equalsIgnoreCase("seecandidate")) {
+            Candidate candidate = new Candidate();
+            List<Candidate> candidateList = new VotingService().getCandidateList();   //returned in list
+            request.setAttribute("candidate", candidate);
+            request.setAttribute("candidateList", candidateList);
+
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("candidatelist.jsp");
             requestDispatcher.forward(request, response);
         }
 
-        //display add election form
-        if (page.equalsIgnoreCase("addElection")) {
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("addElection.jsp");
-            requestDispatcher.forward(request, response);
-        }
 
         //display add candidate form
         if (page.equalsIgnoreCase("addCandidate")) {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("addCandidate.jsp");
+            requestDispatcher.forward(request, response);
+        }
+
+        //add candidate with the preference list
+        if (page.equalsIgnoreCase("addCandidateDetails")) {
+
+            Candidate candidate = new Candidate();
+
+            Part file = request.getPart("profileCandidate");
+            String imageFileName = file.getSubmittedFileName();
+
+            String uploadPath = "C://Users//DELL//IdeaProjects//VotingSystem//src//main//webapp//candidateProfile//" + imageFileName;
+
+            try{
+                FileOutputStream fileOutputStream = new FileOutputStream(uploadPath);
+                InputStream inputStream = file.getInputStream();
+
+                byte[] data = new byte[inputStream.available()];
+                inputStream.read(data);
+                fileOutputStream.write(data);
+                fileOutputStream.close();
+
+                candidate.setCandidateProfile(imageFileName);
+
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+
+            candidate.setFullNameCandidate(request.getParameter("nameCandidate"));
+            candidate.setEmailCandidate(request.getParameter("emailCandidate"));
+            candidate.setAgeCandidate(Integer.parseInt(request.getParameter("ageCandidate")));
+            candidate.setAddressCandidate(request.getParameter("addressCandidate"));
+            candidate.setGenderCandidate(request.getParameter("genderCandidate"));
+            candidate.setCandidate(request.getParameter("candidate"));
+            candidate.setExperience(request.getParameter("experience"));
+
+            // executing query with the value generated by form
+            new VotingService().addCandidate(candidate);
+
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("adminDash.jsp");
             requestDispatcher.forward(request, response);
         }
 
@@ -181,6 +297,85 @@ public class HelloServlet extends HttpServlet {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("resultAdmin.jsp");
             requestDispatcher.forward(request, response);
         }
+
+        //see candidate details
+        if (page.equalsIgnoreCase("candidateDetailsAdmin")) {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("candidateDetailsAdmin.jsp");
+            requestDispatcher.forward(request, response);
+        }
+
+        //exit candidate profile
+        if (page.equalsIgnoreCase("cancelAdmin")) {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("candidatelist.jsp");
+            requestDispatcher.forward(request, response);
+        }
+
+        //logout admin
+        if (page.equalsIgnoreCase("logoutAdmin")) {
+            HttpSession session = request.getSession(false);
+            session.invalidate();
+//            Current session return if not available new session in true
+//            Current session return if not available return null in false
+
+
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
+            requestDispatcher.forward(request, response);
+        }
+
+
+//--------------------------------------User Panel------------------------------------------------
+        //display user landing page
+        if (page.equalsIgnoreCase("election")) {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("landing.jsp");
+            requestDispatcher.forward(request, response);
+        }
+
+        //display rules for user from nav
+        if (page.equalsIgnoreCase("rules")) {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("rules.jsp");
+            requestDispatcher.forward(request, response);
+        }
+
+        //open candidate list from user
+        if (page.equalsIgnoreCase("candidateCard")) {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("candidateCard.jsp");
+            requestDispatcher.forward(request, response);
+        }
+
+        //open voting result for user
+        if (page.equalsIgnoreCase("resultUser")) {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("resultUser.jsp");
+            requestDispatcher.forward(request, response);
+        }
+
+        //open user profile from nav
+        if (page.equalsIgnoreCase("userprofile")) {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("userProfile.jsp");
+            requestDispatcher.forward(request, response);
+        }
+
+        //see details of candidate profile
+        if (page.equalsIgnoreCase("seeCandidateDetails")) {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("candidateProfile.jsp");
+            requestDispatcher.forward(request, response);
+        }
+
+        //exit details of candidate profile
+        if (page.equalsIgnoreCase("cancel")) {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("candidateCard.jsp");
+            requestDispatcher.forward(request, response);
+        }
+
+        //logout user
+        if (page.equalsIgnoreCase("logoutUser")) {
+            HttpSession session = request.getSession(false);
+            session.invalidate();
+
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
+            requestDispatcher.forward(request, response);
+        }
+
+
     }
 
     public void destroy() {

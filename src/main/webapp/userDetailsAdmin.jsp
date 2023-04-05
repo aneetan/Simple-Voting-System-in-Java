@@ -1,0 +1,122 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: Aneeta
+  Date: 4/4/2023
+  Time: 5:29 PM
+  To change this template use File | Settings | File Templates.
+--%>
+
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="css/profile.css">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+  <title>User Profile</title>
+</head>
+<body>
+
+<div class="containerPro" style="background: none">
+  <div class="row">
+    <div class="col-md mt-1">
+      <div class="card text-center sidebar">
+        <div class="card-body">
+          <img src="img/pro2.jpg" alt="profile" width="150">
+          <div class="user-content">
+            <h3> Anita Neupane</h3>
+            <p> User</p>
+            <hr>
+            <a href=""> Delete User </a>
+            <hr>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-8 mt-1">
+      <div class="card mb-3 content">
+        <div class="content-head">
+          <h1 class="m-3 pt-3"> About</h1>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-3">
+              <h5> Full Name</h5>
+            </div>
+            <div class="col-md-9 text-secondary"> Anita Neupane </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-md-3">
+              <h5> Email</h5>
+            </div>
+            <div class="col-md-9 text-secondary"> temp@gmail.com </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-md-3">
+              <h5> DOB</h5>
+            </div>
+            <div class="col-md-9 text-secondary"> 2004-05-03</div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-md-3">
+              <h5> Address</h5>
+            </div>
+            <div class="col-md-9 text-secondary"> Kathmandu</div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-md-3">
+              <h5> Gender</h5>
+            </div>
+            <div class="col-md-9 text-secondary"> Female </div>
+          </div>
+
+
+
+
+        </div>
+      </div>
+      <div class="card mb-3 content">
+        <div class="content-head">
+          <h1 class=" m-3 pt-3"> Identity</h1>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-3">
+              <h5> Citizenship Number</h5>
+            </div>
+            <div class="col-md-9 text-secondary"> 123456789 </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-md-3">
+              <h5> Issued District</h5>
+            </div>
+            <div class="col-md-9 text-secondary"> Syangja </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-md-3">
+              <h5> Issued Date</h5>
+            </div>
+            <div class="col-md-9 text-secondary"> 2004-05-03</div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+

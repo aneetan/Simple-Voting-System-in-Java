@@ -35,11 +35,11 @@
             <div class="container">
                 <!-- <hr> -->
 
-                <form action="#" id="authorizeForm">
+                <form action="vote?page=addCandidateDetails" id="authorizeForm" method="post" enctype="multipart/form-data">
                     <div class="form first">
                         <div class="input-field photo-upload">
                             <img src="img/img.png" alt="Choose photo"> <br>
-                            <input type="file" class="img-file" name="profile">
+                            <input type="file" id="profileCan" class="img-file" name="profileCandidate">
                         </div>
                         <div class="details personal">
                             <!-- <span class="title">Personal Details</span> -->
@@ -48,40 +48,40 @@
 
                                 <div class="input-field">
                                     <label> Full Name</label>
-                                    <input id="name" type="text" placeholder="Enter full name" required>
+                                    <input id="nameCandidate" name="nameCandidate" type="text" placeholder="Enter full name" required>
                                 </div>
                                 <div class="input-field">
                                     <label> Email</label>
-                                    <input id="email" type="email" placeholder="Enter email" required>
+                                    <input id="emailCandidate" name="emailCandidate" type="email" placeholder="Enter email" required>
                                 </div>
 
                                 <div class="input-field">
                                     <label>Age</label>
-                                    <input id="address" type="text" placeholder="Enter age" required>
+                                    <input id="ageCandidate"  name="ageCandidate" type="text" placeholder="Enter age" required>
                                 </div>
                             </div>
                             <div class="fields">
                                 <div class="input-field">
                                     <label>Address</label>
-                                    <input id="age" type="text" placeholder="Enter address" required>
+                                    <input id="addressCandidate" name="addressCandidate" type="text" placeholder="Enter address" required>
                                 </div>
 
                                 <div class="input-field">
                                     <label>Gender</label>
-                                    <select required>
+                                    <select name="genderCandidate" required>
                                         <option disabled selected>Select gender</option>
-                                        <option>Male</option>
-                                        <option>Female</option>
-                                        <option>Others</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Gender">Others</option>
                                     </select>
                                 </div>
 
                                 <div class="input-field">
-                                    <label>Specify Candidancy</label>
-                                    <select required>
+                                    <label>Specify Candidacy</label>
+                                    <select name="candidate" required>
                                         <option disabled selected>Specify</option>
-                                        <option>Semester II(A)</option>
-                                        <option>Semester II(B)</option>
+                                        <option value="Semester II(A)">Semester II(A)</option>
+                                        <option value="Semester II(B)">Semester II(B)</option>
                                     </select>
                                 </div>
                             </div>
@@ -89,7 +89,7 @@
 
                         <div class="input-field">
                             <label> Add Experience</label>
-                            <textarea class="textarea" placeholder="For semester II Class Representative" required></textarea>
+                            <textarea name="experience" class="textarea" placeholder="Enter past works and experience here" required></textarea>
                         </div>
 
                         <div class="btn-place">
@@ -109,7 +109,7 @@
 
     <script>
         //changing the image to file option
-        const img = document.querySelector("img");
+        const img = document.getElementById("profileCan");
         input = document.querySelector("input");
 
         input.addEventListener("change", () => {

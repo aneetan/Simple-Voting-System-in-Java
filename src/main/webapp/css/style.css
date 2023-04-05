@@ -462,3 +462,53 @@ form.sign-in-form {
         left: 50%;
     }
 }
+
+
+/* Card  */
+.election-card{
+    margin: 14px 50px 20px 50px;
+    width: 600px;
+    padding: 18px;
+}
+
+.election-content h2{
+    font-weight: 700;
+    font-size: 40px;
+    margin: 14px 50px 0 50px;
+}
+.election-content h2 span{
+    color: #0080ff;
+}
+.election-content p{
+    font-weight: 400;
+    font-size: 20px;
+    color: #726d6d;
+    margin: 0 50px 0 50px;
+
+}
+.card-title{
+    color: #0080ff;
+    font-weight: 600;
+    font-size: 28px;
+}
+.card-text,
+.list-group-item{
+    font-size: 16px;
+    color: #444;
+}
+.bx-calendar-alt{
+    font-size: 20px;
+}
+.card-link {
+    font-size: 18px;
+}
+
+/* Rules */
+.list-group-item{
+    font-family: 'Poppins', sans-serif;
+    background-color: #f9f9f9;
+    font-weight: 500;
+    color: #232323;
+    list-style: none;
+    /* margin: 12px 0 0 50px; */
+}

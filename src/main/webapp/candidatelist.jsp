@@ -5,6 +5,8 @@
   Time: 12:15 AM
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
   <meta charset="UTF-8">
@@ -14,6 +16,8 @@
   <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+  <anyxmlelement xmlns:c="http://java.sun.com/jsp/jstl/core" />
 
   <link rel="stylesheet" href="css/admin.css" />
 
@@ -48,19 +52,25 @@
             </tr>
             </thead>
             <tbody>
+
+            <c:forEach items="${candidateList}" var="candidate">
+
             <tr>
               <td>
-                <img src="img/people.png">
-                John Doe
+                <img src="C://Users//DELL//IdeaProjects//VotingSystem//src//main//webapp//candidateProfile//${candidate.candidateProfile}">
+<%--                <img src="C:\Users\DELL\IdeaProjects\VotingSystem\src\main\webapp\candidateProfile\pro2.jpg">--%>
+              ${candidate.fullNameCandidate}
               </td>
-              <td>temp@gmail.com</td>
-              <td> 24</td>
-              <td> Syangja</td>
-              <td> Female</td>
+              <td>${candidate.emailCandidate}</td>
+              <td> ${candidate.ageCandidate}</td>
+              <td> ${candidate.addressCandidate}</td>
+              <td> ${candidate.genderCandidate}</td>
 
-              <td> <a href=""> See details</a> </td>
+              <td> <a href="vote?page=candidateDetailsAdmin"> See details</a> </td>
 
             </tr>
+            </c:forEach>
+
             </tbody>
           </table>
         </div>

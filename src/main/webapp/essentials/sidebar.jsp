@@ -61,12 +61,40 @@
         <ul class="side-menu">
 
             <li>
-                <a href="vote?page=adminLogout" class="logout">
+                <a href="vote?page=logoutAdmin" class="logout">
                     <i class='bx bx-arrow-from-left'></i>
                     <span class="text">Logout</span>
                 </a>
             </li>
         </ul>
     </section>
+
+<%--<script src="admin.js"></script>--%>
+<script>
+    const allSideMenu = document.querySelectorAll('#sidebar .side-menu.top li a');
+
+    allSideMenu.forEach(item=> {
+        const li = item.parentElement;
+
+        item.addEventListener('click', function () {
+            allSideMenu.forEach(i=> {
+                i.parentElement.classList.remove('active');
+            })
+            li.classList.add('active');
+        })
+    });
+
+
+    // TOGGLE SIDEBAR
+    const menuBar = document.querySelector('#content nav .bx.bx-menu');
+    const sidebar = document.getElementById('sidebar');
+
+    menuBar.addEventListener('click', function () {
+        sidebar.classList.toggle('hide');
+    })
+
+
+
+</script>
 </body>
 </html>

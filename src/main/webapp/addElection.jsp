@@ -36,36 +36,36 @@
                 <div class="title">
                     Please fill the Details
                 </div>
-                <form action="" method="post">
+                <form action="vote?page=addElectionDetails" method="post" enctype="multipart/form-data">
                     <p class="photo">Select cover photo</p>
                     <div class="inputfield">
-                        <img src="img/img.png" alt="Choose photo"> <br>
+                        <img src="img/img.png" id="profile" alt="Choose photo"> <br>
                         <input type="file" class="img-file" name="profile">
                     </div>
 
                     <div class="inputfield">
                         <label>Election Title</label>
-                        <input type="text" class="input" placeholder="Eg. Ongoing Election" required>
+                        <input type="text" name="electionTitle" class="input" placeholder="Eg. Ongoing Election" required>
                     </div>
 
 
                     <div class="inputfield">
                         <label>Candidancy for</label>
                         <div class="custom_select">
-                            <select>
+                            <select name="candidacy">
                                 <option value="" disabled selected>Select</option>
-                                <option value="male">Semester II(A)</option>
-                                <option value="female">Semester II(B)</option>
+                                <option value="Semester II(A)">Semester II(A)</option>
+                                <option value="Semester II(B)">Semester II(B)</option>
                             </select>
                         </div>
                     </div>
 
                     <div class="inputfield">
                         <label>Select Date</label>
-                        <input type="date" class="input" required>
+                        <input type="date" class="input" name="electionDate" required>
                     </div>
                     <div class="inputfield">
-                        <input type="submit" value="Register" class="btn">
+                        <input type="submit" value="Add Election" class="btn">
                     </div>
                 </form>
             </div>
@@ -79,7 +79,7 @@
 
     <script>
         //changing the image to file option
-        const img = document.querySelector("img");
+        const img = document.getElementById("profile");
         input = document.querySelector("input");
 
         input.addEventListener("change", () => {
