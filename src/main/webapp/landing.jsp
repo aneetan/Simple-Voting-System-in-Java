@@ -40,7 +40,7 @@
 
             <div class="col">
                 <div class="card">
-                    <img src="C://Users//DELL//IdeaProjects//VotingSystem//src//main//webapp//uploadimage//${election.imageFileName}" class="card-img-top" alt="...">
+                    <img src="uploadimage//${election.imageFileName}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">${election.electionName}</h5>
                         <p class="card-text"> ${election.candidacy} </p>

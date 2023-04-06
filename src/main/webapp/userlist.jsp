@@ -58,7 +58,7 @@
                         <c:forEach items="${userList}" var="user">
                             <tr>
                                 <td>
-                                    <img src="C://Users//DELL//IdeaProjects//VotingSystem//src//main//webapp//userProfile//${user.userProfile}">
+                                    <img src="userProfile//${user.userProfile}">
                                     ${user.fullName}
                                 </td>
                                 <td>${user.email}</td>

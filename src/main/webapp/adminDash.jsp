@@ -84,7 +84,7 @@
 
                         <tr>
                             <td>
-                                <img src="C://Users//DELL//IdeaProjects//VotingSystem//src//main//webapp//candidateProfile//${candidate.candidateProfile}">
+                                <img src="candidateProfile//${candidate.candidateProfile}">
                                 <p>${candidate.fullNameCandidate}</p>
                             </td>
                             <td> ${candidate.ageCandidate}</td>
@@ -105,7 +105,7 @@
                     <c:forEach items="${electionList}" var="election">
 
                     <div class="card" style="width: 15rem;">
-                        <img src="C://Users//DELL//IdeaProjects//VotingSystem//src//main//webapp//uploadimage//${election.imageFileName}" class="card-img-top" alt="election-img">
+                        <img src="uploadimage//${election.imageFileName}" class="card-img-top" alt="election-img">
                         <div class="card-body">
                             <h5 class="card-title"> ${election.electionName}</h5>
                             <p class="card-text">${election.candidacy}</p>
@@ -114,7 +114,9 @@
                             <li class="list-group-item"> ${election.electionDate}</li>
                         </ul>
                         <div class="card-body">
-                            <a href="vote?page=deleteElection" class="card-link">Delete Election</a>
+                            <a href="vote?page=deleteElection&EId=${election.EId}" class="card-link">Delete Election</a> <br>
+                            <a href="vote?page=editElection&EId=${election.EId}" class="card-link">Edit Election</a>
+
                         </div>
                     </div>
                     </c:forEach>

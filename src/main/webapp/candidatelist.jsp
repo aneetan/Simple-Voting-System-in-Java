@@ -39,7 +39,7 @@
         <div class="order user-list">
           <div class="head">
             <h3>List of Candidates</h3>
-            <i class='bx bx-plus' ></i>
+<%--            <i class='bx bx-plus' ></i>--%>
           </div>
           <table>
             <thead>
@@ -57,8 +57,7 @@
 
             <tr>
               <td>
-                <img src="C://Users//DELL//IdeaProjects//VotingSystem//src//main//webapp//candidateProfile//${candidate.candidateProfile}">
-<%--                <img src="C:\Users\DELL\IdeaProjects\VotingSystem\src\main\webapp\candidateProfile\pro2.jpg">--%>
+                <img src="candidateProfile//${candidate.candidateProfile}">
               ${candidate.fullNameCandidate}
               </td>
               <td>${candidate.emailCandidate}</td>

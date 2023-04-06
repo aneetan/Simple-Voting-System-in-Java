@@ -163,6 +163,63 @@ public class VotingService {
         }
         return electionList;
     }
+
+    //deleting user from database
+    public void deleteElection(int EId) {
+        String query = "Delete from election where EId = ?";
+        PreparedStatement preparedStatement1 = new DBConnection().getStatement(query);
+
+        try {
+            preparedStatement1.setInt(1, EId);
+            preparedStatement1.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //edit election from database
+    public void editElection(int EId, Election election){
+        String query= "Update election set imageFileName=?, electionName=?, candidacy=?, electionDate=?" + " where EId=?";
+        PreparedStatement preparedStatement = new DBConnection().getStatement(query);
+
+        try{
+            preparedStatement.setString(1, election.getImageFileName());
+            preparedStatement.setString(2, election.getElectionName());
+            preparedStatement.setString(3, election.getCandidacy());
+            preparedStatement.setString(4, election.getElectionDate());
+
+            preparedStatement.setInt(5,EId);
+            preparedStatement.execute();
+
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+
+    }
+
+    public Election electionDetails(int EId){
+        String query = "Select * from election where EId =?";
+        PreparedStatement preparedStatement = new DBConnection().getStatement(query);
+        Election election = new Election();
+
+
+        try{
+            preparedStatement.setInt(1, EId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while( resultSet.next()){
+                election.setEId(resultSet.getInt("EId"));
+                election.setImageFileName(resultSet.getString("imageFileName"));
+                election.setElectionName(resultSet.getString("electionName"));
+                election.setCandidacy(resultSet.getString("candidacy"));
+                election.setElectionDate(resultSet.getString("electionDate"));
+
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return election;
+    }
     public List<Candidate> getCandidateList(){
         ArrayList<Candidate> candidateList = new ArrayList<>();
         String query = "select * from candidate";
@@ -191,6 +248,43 @@ public class VotingService {
             e.printStackTrace();
         }
         return candidateList;
+    }
+
+    //deleting user from database
+    public void deleteCandidate(int canId) {
+        String query = "Delete from candidate where canId = ?";
+        PreparedStatement preparedStatement1 = new DBConnection().getStatement(query);
+
+        try {
+            preparedStatement1.setInt(1, canId);
+            preparedStatement1.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //edit candidate from database
+    public void editCandidate(int canId, Candidate candidate){
+        String query= "Update candidate set candidateProfile=?,fullNameCandidate=?, emailCandidate=?, ageCandidate=?, addressCandidate=?, genderCandidate=?, candidate=?, experience=?" + " where canId=?";
+        PreparedStatement preparedStatement = new DBConnection().getStatement(query);
+
+        try{
+            preparedStatement.setString(1, candidate.getCandidateProfile());
+            preparedStatement.setString(2, candidate.getFullNameCandidate());
+            preparedStatement.setString(3, candidate.getEmailCandidate());
+            preparedStatement.setInt(4, candidate.getAgeCandidate());
+            preparedStatement.setString(5, candidate.getAddressCandidate());
+            preparedStatement.setString(6, candidate.getGenderCandidate());
+            preparedStatement.setString(7, candidate.getCandidate());
+            preparedStatement.setString(8, candidate.getExperience());
+
+            preparedStatement.setInt(9,canId);
+            preparedStatement.execute();
+
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+
     }
 
     public List<VotingSystem> getUserList(){
@@ -250,6 +344,47 @@ public class VotingService {
             e.printStackTrace();
         }
         return votingSystem;
+    }
+
+    //edit candidate from database
+    public void editUser(int id, VotingSystem votingSystem){
+        String query= "Update voter set email=?,dob=?,userProfile=?,fullName=?,address=?,gender=?,citizenNo=?,issueDistrict=?,issueDate=?" + " where id=?";
+        PreparedStatement preparedStatement = new DBConnection().getStatement(query);
+//        VotingSystem votingSystem = new VotingSystem();
+
+
+        try{
+            preparedStatement.setString(1, votingSystem.getEmail());
+            preparedStatement.setString(2, votingSystem.getDob());
+            preparedStatement.setString(3, votingSystem.getUserProfile());
+            preparedStatement.setString(4, votingSystem.getFullName());
+            preparedStatement.setString(5, votingSystem.getAddress());
+            preparedStatement.setString(6, votingSystem.getGender());
+            preparedStatement.setString(7, votingSystem.getCitizenNo());
+            preparedStatement.setString(8, votingSystem.getIssueDistrict());
+            preparedStatement.setString(9, votingSystem.getIssueDate());
+
+
+            preparedStatement.setInt(10,id);
+            preparedStatement.execute();
+
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+
+    }
+
+    //deleting user from database
+    public void deleteUser(int id) {
+        String query = "Delete from voter where id = ?";
+        PreparedStatement preparedStatement1 = new DBConnection().getStatement(query);
+
+        try {
+            preparedStatement1.setInt(1, id);
+            preparedStatement1.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public Candidate candidateDetails(int canId){

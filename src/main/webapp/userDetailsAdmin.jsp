@@ -26,12 +26,12 @@
     <div class="col-md mt-1">
       <div class="card text-center sidebar">
         <div class="card-body">
-          <img src="img/pro2.jpg" alt="profile" width="150">
+          <img src="C://Users//DELL//IdeaProjects//VotingSystem//src//main//webapp//userProfile//${votingSystem.userProfile}" alt="profile" width="150">
           <div class="user-content">
             <h3> ${votingSystem.fullName}</h3>
             <p> User</p>
             <hr>
-            <a href=""> Delete User </a>
+            <a href="vote?page=deleteUser&id=${votingSystem.id}"> Delete User </a>
             <hr>
 
           </div>
@@ -45,13 +45,6 @@
           <h1 class="m-3 pt-3"> About</h1>
         </div>
         <div class="card-body">
-<%--          <div class="row">--%>
-<%--            <div class="col-md-3">--%>
-<%--              <h5> Full Name</h5>--%>
-<%--            </div>--%>
-<%--            <div class="col-md-9 text-secondary"> ${votingSystem.fullName} </div>--%>
-<%--          </div>--%>
-<%--          <hr>--%>
           <div class="row">
             <div class="col-md-3">
               <h5> Email</h5>

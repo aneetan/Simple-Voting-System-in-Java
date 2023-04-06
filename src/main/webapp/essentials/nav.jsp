@@ -6,11 +6,15 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+
 <html>
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <anyxmlelement xmlns:c="http://java.sun.com/jsp/jstl/core" />
+
 
   <!-- Local css linkage -->
   <link rel="stylesheet" href="css/style.css" />
@@ -41,7 +45,7 @@
         <a href="vote?page=resultUser" class="nav-link" style="color: white ;">View Result</a>
       </li>
       <li class="nav-item">
-        <a href="vote?page=userProfile" class="nav-link" style="color: white ;" >Profile</a>
+        <a href="vote?page=userProfile&id=${votingSystem.id}" class="nav-link" style="color: white ;" >Profile</a>
       </li>
 
     </ul>

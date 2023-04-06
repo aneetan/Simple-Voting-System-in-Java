@@ -26,7 +26,7 @@
     <div class="wrapper">
         <div class="left">
 
-            <img src="C://Users//DELL//IdeaProjects//VotingSystem//src//main//webapp//candidateProfile//${candidate.candidateProfile}" alt="user" width="100">
+            <img src="candidateProfile//${candidate.candidateProfile}" alt="user" width="100">
             <h4> ${candidate.fullNameCandidate}</h4>
             <p>${candidate.candidate}</p>
 
@@ -72,8 +72,8 @@
             </div>
 
             <!-- <button class="btnVote" id="votebtn"> Edit Details</button> -->
-            <a href="" class="adminLink"> Edit details</a> <br>
-            <a href="" class="adminLink"> Delete Candidate</a>
+            <a href="vote?page=editCandidate&canId=${candidate.canId}" class="adminLink"> Edit details</a> <br>
+            <a href="vote?page=deleteCandidate&canId=${candidate.canId}" class="adminLink"> Delete Candidate</a>
 
             <!-- <input type="submit" value="Vote Now" class="btn" id="votebtn"> -->
 
