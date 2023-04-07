@@ -13,8 +13,11 @@
         <url-pattern>/vote</url-pattern>
     </servlet-mapping>
 
+
     <session-config>
         <!--        session closes after this time-->
         <session-timeout> 30 </session-timeout>
     </session-config>
+
+
 </web-app>

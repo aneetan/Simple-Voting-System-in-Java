@@ -374,6 +374,58 @@ public class VotingService {
 
     }
 
+    //searching
+    public List<VotingSystem> searchUser(String searchQuery){
+        ArrayList<VotingSystem> userList = new ArrayList<>();
+        String query = "select * from voter where fullName like ?";
+        PreparedStatement preparedStatement = new DBConnection().getStatement(query);
+
+        try{
+            preparedStatement.setString(1, "%" + searchQuery + "%");
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while( resultSet.next()){
+                VotingSystem votingSystem = new VotingSystem();
+
+                votingSystem.setId(resultSet.getInt("id"));
+                votingSystem.setUserProfile(resultSet.getString("userProfile"));
+                votingSystem.setFullName(resultSet.getString("fullName"));
+                votingSystem.setEmail(resultSet.getString("email"));
+                votingSystem.setDob(resultSet.getString("dob"));
+                votingSystem.setAddress(resultSet.getString("address"));
+                votingSystem.setGender(resultSet.getString("gender"));
+                votingSystem.setCitizenNo(resultSet.getString("citizenNo"));
+                votingSystem.setIssueDistrict(resultSet.getString("issueDistrict"));
+                votingSystem.setIssueDate(resultSet.getString("issueDate"));
+
+
+                userList.add(votingSystem);
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return userList;
+    }
+
+    //get total users
+    public  int getTotalUsers() {
+        int total = 0;
+        String query = "select count(*) as total from voter";
+        PreparedStatement preparedStatement = new DBConnection().getStatement(query);
+
+        try {
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                total = resultSet.getInt("total");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return total;
+    }
+
+
     //deleting user from database
     public void deleteUser(int id) {
         String query = "Delete from voter where id = ?";

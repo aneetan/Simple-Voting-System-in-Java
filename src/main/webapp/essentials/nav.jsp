@@ -17,7 +17,7 @@
 
 
   <!-- Local css linkage -->
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="../css/style.css" />
 
   <!-- Boxicon link -->
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -26,6 +26,103 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
   <title> Navbar </title>
+  <style>
+    /*Navbar*/
+    header{
+      background-color: #3085db;
+
+    }
+    li{
+      list-style: none;
+    }
+
+    .nav-branding{
+      color: white;
+      text-decoration: none;
+      font-size: 24px;
+      font-weight: 600;
+      margin-left: 6px;
+    }
+
+    .navbar{
+      font-family: 'Poppins', sans-serif;
+      min-height: 70px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 24px;
+
+    }
+
+    .nav-menu{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 60px;
+    }
+
+    .nav-link{
+      margin-top: 12px;
+      transition: 0.7s ease;
+      font-size: 18px;
+      color: white;
+    }
+
+    .nav-link:hover{
+      color: white;
+
+    }
+
+    .hamburger{
+      display: none;
+      cursor: pointer;
+    }
+
+    .bar{
+      display: block;
+      width: 25px;
+      height: 3px;
+      margin: 5px auto;
+      -webkit-transition: all 0.3s ease-in-out;
+      background-color: white;
+    }
+
+    @media(max-width: 768px){
+      .hamburger{
+        display: block;
+      }
+
+      .hamburger.active .bar:nth-child(2){
+        opacity: 0;
+
+      }
+      .hamburger.active .bar:nth-child(1){
+        transform: translateY(8px) rotate(45deg);
+      }
+      .hamburger.active .bar:nth-child(3){
+        transform: translateY(-8px) rotate(-45deg);
+      }
+      .nav-menu{
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        gap: 0;
+        flex-direction: column;
+        background-color: #3085db;
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+      }
+
+      .nav-item{
+        margin: 16px 0;
+      }
+      .nav-menu.active{
+        left:0;
+      }
+
+    }
+  </style>
 </head>
 <body>
 <header>

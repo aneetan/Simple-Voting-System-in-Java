@@ -26,7 +26,7 @@
     <div class="col-md mt-1">
       <div class="card text-center sidebar">
         <div class="card-body">
-          <img src="C://Users//DELL//IdeaProjects//VotingSystem//src//main//webapp//userProfile//${votingSystem.userProfile}" alt="profile" width="150">
+          <img src="userProfile//${votingSystem.userProfile}" alt="profile" width="150">
           <div class="user-content">
             <h3> ${votingSystem.fullName}</h3>
             <p> User</p>

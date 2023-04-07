@@ -24,6 +24,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <title> Edit user Details </title>
+
 </head>
 <body style="background: #fff">
     <%@ include file="essentials/nav.jsp"%>
@@ -35,7 +36,7 @@
             <div class="col-md mt-1">
                 <div class="card text-center sidebar">
                     <div class="card-body">
-                        <img src="C://Users//DELL//IdeaProjects//VotingSystem//src//main//webapp//userProfile//${votingSystem.userProfile}" alt="profile" width="150">
+                        <img src="userProfile//${votingSystem.userProfile}" alt="profile" width="150">
                         <div class="user-content">
                             <h3> ${votingSystem.fullName}</h3>
                             <p> User</p>
@@ -57,6 +58,7 @@
 
             <div class="col-md-8 mt-1">
 <%--                <div class="card mb-3 content">--%>
+                <input type="hidden" name="id" value="${votingSystem.id}">
                     <div class="content-head">
                         <h1 class="m-3 pt-3"> Edit Details</h1>
                     </div>
@@ -68,23 +70,23 @@
                                 <div class="fields">
                                     <div class="input-field">
                                         <label> Email</label>
-                                        <input id="email" type="email" placeholder="Enter email" required>
+                                        <input id="email" type="email" value="${votingSystem.email}" required>
                                     </div>
 
                                     <div class="input-field">
                                         <label> DOB</label>
-                                        <input id="date" type="date" placeholder="Enter dob" required>
+                                        <input id="date" type="date" value="${votingSystem.dob}" required>
                                     </div>
 
 
                                     <div class="input-field">
                                         <label> Full Name</label>
-                                        <input id="name" type="text" placeholder="Enter full name" required>
+                                        <input id="name" type="text" value="${votingSystem.fullName}" required>
                                     </div>
 
                                     <div class="input-field">
                                         <label>Address</label>
-                                        <input id="address" type="text" placeholder="Enter address" required>
+                                        <input id="address" type="text" value="${votingSystem.address}" required>
                                     </div>
 
                                     <div class="input-field">
@@ -99,17 +101,17 @@
 
                                     <div class="input-field">
                                         <label>Citizenship Number</label>
-                                        <input id="idNum" type="tel" placeholder="Enter Citizenship number" required>
+                                        <input id="idNum" type="tel" value="${votingSystem.citizenNo}" required>
                                     </div>
 
                                     <div class="input-field">
                                         <label>Issued District</label>
-                                        <input id="idDistrict" type="text" placeholder="Enter issued district" required>
+                                        <input id="idDistrict" type="text" value="${votingSystem.issueDistrict}" required>
                                     </div>
 
                                     <div class="input-field">
                                         <label>Issued Date</label>
-                                        <input id="idDate" type="date" placeholder="Enter your issued date" required>
+                                        <input id="idDate" type="date" value="${votingSystem.issueDate}" required>
                                     </div>
 
                                     <div class="input-field">

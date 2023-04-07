@@ -39,6 +39,8 @@ public class HelloServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         response.setContentType("text/html");
 
+        int initialPage = 1;
+        int recordsPerPage = 5;
         String page = request.getParameter("page");
 
 //--------------------------------------Registration and Login------------------------------------------------
@@ -56,6 +58,7 @@ public class HelloServlet extends HttpServlet {
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("authorize.jsp");
                 requestDispatcher.forward(request, response);
             }
+
         if (page.equalsIgnoreCase("authorizeUser")) {
             VotingSystem votingSystem = (VotingSystem) request.getSession().getAttribute("votingSystem");
 
@@ -488,6 +491,20 @@ public class HelloServlet extends HttpServlet {
             requestDispatcher.forward(request, response);
         }
 
+        //search user list
+        if (page.equalsIgnoreCase("searchUser")){
+            String searchQuery = request.getParameter("search");
+
+            VotingSystem votingSystem = new VotingSystem();
+
+            List<VotingSystem> userList = new VotingService().searchUser(searchQuery);   //returned in list
+            request.setAttribute("votingSystem", votingSystem);
+            request.setAttribute("userList", userList);
+
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("userlist.jsp");
+            requestDispatcher.forward(request, response);
+        }
+
         //display add candidate form
         if (page.equalsIgnoreCase("resultAdmin")) {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("resultAdmin.jsp");
@@ -523,6 +540,11 @@ public class HelloServlet extends HttpServlet {
 
         //exit candidate profile
         if (page.equalsIgnoreCase("cancelAdmin")) {
+            Candidate candidate = new Candidate();
+            List<Candidate> candidateList = new VotingService().getCandidateList();   //returned in list
+            request.setAttribute("candidate", candidate);
+            request.setAttribute("candidateList", candidateList);
+
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("candidatelist.jsp");
             requestDispatcher.forward(request, response);
         }

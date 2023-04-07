@@ -14,7 +14,7 @@ public class DBConnection {
             String userName = "root";
             String password = "";
             this.connection = DriverManager.getConnection(url,userName, password);
-            System.out.println("Database Connected");
+//            System.out.println("Database Connected");
 
         } catch(SQLException | ClassNotFoundException e){
             e.printStackTrace();

@@ -44,7 +44,7 @@
 
               <p class="photo">Select cover photo</p>
             <div class="inputfield">
-              <img src="C://Users//DELL//IdeaProjects//VotingSystem//src//main//webapp//uploadimage//${election.imageFileName}" id="profile" alt="Choose photo"> <br>
+              <img src="uploadimage//${election.imageFileName}" id="profile" alt="Choose photo"> <br>
               <input type="file" class="img-file" name="profile" value="${election.imageFileName}">
             </div>
 

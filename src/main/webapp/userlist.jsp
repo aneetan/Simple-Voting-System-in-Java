@@ -7,6 +7,7 @@
 --%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@page import="java.sql.*" %>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -21,7 +22,26 @@
 
     <link rel="stylesheet" href="css/admin.css" />
 
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+    <script src="jquery-3.6.4.min"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" ></script>
+
+
     <title> User List</title>
+    <style>
+        .searchForm{
+            display: flex;
+        }
+        .dataTables_filter label{
+            display: none;
+        }
+    </style>
 </head>
 <body>
     <%@ include file="essentials/sidebar.jsp"%>
@@ -31,19 +51,26 @@
         </nav>
 
         <main>
-            <div class="head-title">
-                <div class="left">
-                    <h1>User List</h1>
-                </div>
-            </div>
+<%--            <div class="head-title">--%>
+<%--                <div class="left">--%>
+<%--                    <h1>User List</h1>--%>
+<%--                </div>--%>
+<%--            </div>--%>
 
             <div class="table-data list-data">
                 <div class="order user-list">
-                    <div class="head">
+                    <div class="head" style="margin-bottom: 5px">
                         <h3>List of User</h3>
-                        <i class='bx bx-plus' ></i>
+<%--                        <i class='bx bx-plus' ></i>--%>
+                        <form action="vote?page=searchUser" method="Post" class="searchForm">
+                            <input class="form-control me-2" autocomplete="off" name="search" type="search" placeholder="Search name" style="width: 50%" aria-label="Search">
+                            <input type="submit" value="Search" class="btn btn-primary">
+                        </form>
                     </div>
-                    <table>
+
+                    <div class="container">
+                    <c:if test="${not empty userList}">
+                    <table class="table table-fluid" id="myTable">
                         <thead>
                         <tr>
                             <th>Name</th>
@@ -73,27 +100,45 @@
 
                         </tbody>
                     </table>
+
+                    </c:if>
+
+                    <c:if test="${empty userList}">
+                        <p> No user found!!</p>
+                    </c:if>
+
+                </div>
                 </div>
             </div>
         </main>
     </section>
 
-    <nav aria-label="Page navigation example" style="margin: 300px 12px 0 0;">
-        <ul class="pagination justify-content-end">
-            <li class="page-item disabled">
-                <a class="page-link" href="#" style="background: #d1d0df;" tabindex="-1" aria-disabled="true">Previous</a>
-            </li>
-            <li class="page-item"><a class="page-link" style="background: #d1d0df;" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" style="background: #d1d0df;" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" style="background: #d1d0df;" href="#">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#" style="background: #d1d0df;">Next</a>
-            </li>
-        </ul>
-    </nav>
+<%--    <nav aria-label="Page navigation example" style="margin: 300px 12px 0 0;">--%>
+<%--        <ul class="pagination justify-content-end">--%>
+<%--            <li class="page-item disabled">--%>
+<%--                <a class="page-link" href="#" style="background: #d1d0df;" tabindex="-1" aria-disabled="true">Previous</a>--%>
+<%--            </li>--%>
+<%--            <li class="page-item"><a class="page-link" style="background: #d1d0df;" href="#">1</a></li>--%>
+<%--            <li class="page-item"><a class="page-link" style="background: #d1d0df;" href="#">2</a></li>--%>
+<%--            <li class="page-item"><a class="page-link" style="background: #d1d0df;" href="#">3</a></li>--%>
+<%--            <li class="page-item">--%>
+<%--                <a class="page-link" href="#" style="background: #d1d0df;">Next</a>--%>
+<%--            </li>--%>
+<%--        </ul>--%>
+<%--    </nav>--%>
 
+     <script>
+         // $(document).ready( function () {
+         //     $('#myTable').DataTable();
+         // } );
+         $(document).ready(function() {
+             $('#myTable').DataTable({
+                 "pagingType": "full_numbers",
+                 "pageLength": 5,
+                 // other options here...
+             });
+         });
 
-    <script src="script.js"></script>
-
+     </script>
 </body>
 </html>

@@ -43,7 +43,7 @@
                             <input type="hidden" name="canId" value="${candidate.canId}">
 
                             <div class="input-field photo-upload">
-                                <img src="C://Users//DELL//IdeaProjects//VotingSystem//src//main//webapp//candidateProfile//${candidate.candidateProfile}" alt="Choose photo"> <br>
+                                <img src="candidateProfile//${candidate.candidateProfile}" alt="Choose photo"> <br>
                                 <input type="file" id="profileCan" class="img-file" name="profileCandidate">
                             </div>
                             <div class="details personal">
