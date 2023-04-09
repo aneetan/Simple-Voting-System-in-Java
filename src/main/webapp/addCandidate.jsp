@@ -91,11 +91,14 @@
                             <label> Add Experience</label>
                             <textarea name="experience" class="textarea" placeholder="Enter past works and experience here" required></textarea>
                         </div>
+                        <div class="input-field">
+                            <label>Age</label>
+                            <input id="vote"  name="vote" type="hidden" value="0" required>
+                        </div>
 
                         <div class="btn-place">
                             <input type="submit" value="Submit" class="btnText">
                         </div>
-
 
                     </div>
                 </form>

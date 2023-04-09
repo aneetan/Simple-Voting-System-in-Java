@@ -10,6 +10,7 @@ public class Candidate {
     private String genderCandidate;
     private String candidate;
     private String experience;
+    private int votes;
 
     public int getCanId() {
         return canId;
@@ -81,5 +82,13 @@ public class Candidate {
 
     public void setExperience(String experience) {
         this.experience = experience;
+    }
+
+    public int getVotes() {
+        return votes;
+    }
+
+    public void setVotes(int votes) {
+        this.votes = votes;
     }
 }

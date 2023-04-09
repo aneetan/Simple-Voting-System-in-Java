@@ -66,7 +66,7 @@
       </div>
 
       <div class="progress">
-        <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+        <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="(${candidate.votes}/ ${totalVoters})" aria-valuemin="0" aria-valuemax="${totalVoters}">(${candidate.votes}/ ${totalVoters})</div>
       </div>
 
       <button class="btnVote" id="votebtn"> Vote Now</button>

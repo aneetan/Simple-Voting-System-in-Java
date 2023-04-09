@@ -32,25 +32,13 @@
             </div>
 
             <div class="container">
-                <a href=""> Candidate 1 </a>
-                <div class="progress">
-                    <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"> 0 </div>
-                </div>
+                <c:forEach items="${candidateList}" var="candidate">
 
-                <a href=""> Candidate 2 </a>
-                <div class="progress">
-                    <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> 25% </div>
-                </div>
-
-                <a href=""> Candidate 3 </a>
-                <div class="progress">
-                    <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"> 50%</div>
-                </div>
-
-                <a href=""> Candidate 4 </a>
-                <div class="progress">
-                    <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"> 75%</div>
-                </div>
+                    <p> ${candidate.fullNameCandidate}</p>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="(${candidate.votes}/ ${totalVoters})*100" aria-valuemin="0" aria-valuemax="100">(${candidate.votes}/ ${totalVoters})*100</div>
+                    </div>
+                </c:forEach>
             </div>
         </main>
     </section>

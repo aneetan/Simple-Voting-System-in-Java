@@ -3,6 +3,7 @@ package VotingService;
 import DatabaseConnection.DBConnection;
 import Model.Candidate;
 import Model.Election;
+import Model.Vote;
 import Model.VotingSystem;
 
 import java.sql.PreparedStatement;
@@ -120,7 +121,7 @@ public class VotingService {
     }
 
     public void addCandidate(Candidate candidate) {
-        String query = "INSERT INTO candidate(candidateProfile,fullNameCandidate, emailCandidate, ageCandidate, addressCandidate, genderCandidate, candidate, experience)" + "values(?,?,?,?,?,?,?,?)";
+        String query = "INSERT INTO candidate(candidateProfile,fullNameCandidate, emailCandidate, ageCandidate, addressCandidate, genderCandidate, candidate, experience,votes)" + "values(?,?,?,?,?,?,?,?,?)";
         PreparedStatement preparedStatement = new DBConnection().getStatement(query);
 
         try {
@@ -132,6 +133,7 @@ public class VotingService {
             preparedStatement.setString(6, candidate.getGenderCandidate());
             preparedStatement.setString(7, candidate.getCandidate());
             preparedStatement.setString(8, candidate.getExperience());
+            preparedStatement.setInt(9, candidate.getVotes());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -194,14 +196,14 @@ public class VotingService {
         } catch (SQLException e){
             e.printStackTrace();
         }
-
     }
+
+
 
     public Election electionDetails(int EId){
         String query = "Select * from election where EId =?";
         PreparedStatement preparedStatement = new DBConnection().getStatement(query);
         Election election = new Election();
-
 
         try{
             preparedStatement.setInt(1, EId);
@@ -213,7 +215,6 @@ public class VotingService {
                 election.setElectionName(resultSet.getString("electionName"));
                 election.setCandidacy(resultSet.getString("candidacy"));
                 election.setElectionDate(resultSet.getString("electionDate"));
-
             }
         } catch (SQLException e){
             e.printStackTrace();
@@ -240,7 +241,7 @@ public class VotingService {
                 candidate.setGenderCandidate(resultSet.getString("genderCandidate"));
                 candidate.setCandidate(resultSet.getString("candidate"));
                 candidate.setExperience(resultSet.getString("experience"));
-
+                candidate.setVotes(resultSet.getInt("votes"));
 
                 candidateList.add(candidate);
             }
@@ -277,7 +278,6 @@ public class VotingService {
             preparedStatement.setString(6, candidate.getGenderCandidate());
             preparedStatement.setString(7, candidate.getCandidate());
             preparedStatement.setString(8, candidate.getExperience());
-
             preparedStatement.setInt(9,canId);
             preparedStatement.execute();
 
@@ -407,6 +407,41 @@ public class VotingService {
         return userList;
     }
 
+    //pagination
+    public List<VotingSystem> getDetails(int start, int total){
+        ArrayList<VotingSystem> userList = new ArrayList<>();
+        String query = "select * from voter limit ?,?";
+        PreparedStatement preparedStatement = new DBConnection().getStatement(query);
+
+        try{
+            preparedStatement.setInt(1, start);
+            preparedStatement.setInt(2, total);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while( resultSet.next()){
+                VotingSystem votingSystem = new VotingSystem();
+
+                votingSystem.setId(resultSet.getInt("id"));
+                votingSystem.setUserProfile(resultSet.getString("userProfile"));
+                votingSystem.setFullName(resultSet.getString("fullName"));
+                votingSystem.setEmail(resultSet.getString("email"));
+                votingSystem.setDob(resultSet.getString("dob"));
+                votingSystem.setAddress(resultSet.getString("address"));
+                votingSystem.setGender(resultSet.getString("gender"));
+                votingSystem.setCitizenNo(resultSet.getString("citizenNo"));
+                votingSystem.setIssueDistrict(resultSet.getString("issueDistrict"));
+                votingSystem.setIssueDate(resultSet.getString("issueDate"));
+
+
+                userList.add(votingSystem);
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return userList;
+    }
+
+
     //get total users
     public  int getTotalUsers() {
         int total = 0;
@@ -439,6 +474,29 @@ public class VotingService {
         }
     }
 
+    //changing user password
+    public VotingSystem changePw(int id, String password){
+        String query= "select * from voter where id=? and password=?";
+        PreparedStatement preparedStatement= new DBConnection().getStatement(query);
+        VotingSystem votingSystem= null;
+
+        try{
+            preparedStatement.setInt(1, id);
+            preparedStatement.setString(2, password);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next()){
+                votingSystem= new VotingSystem();
+
+                votingSystem.setId(resultSet.getInt("id"));
+                votingSystem.setPassword(resultSet.getString("password"));
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return votingSystem;
+    }
     public Candidate candidateDetails(int canId){
         String query = "Select * from candidate where canId =?";
         PreparedStatement preparedStatement = new DBConnection().getStatement(query);
@@ -466,5 +524,94 @@ public class VotingService {
         return candidate;
     }
 
+    //vote in candidate
+    public void getVotes(int id) {
+        String query = "UPDATE candidate SET votes = votes + 1 WHERE canId = ?";
+        PreparedStatement preparedStatement = new DBConnection().getStatement(query);
+
+        try {
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //if user has voted
+    public boolean userHasVoted(String sessionId){
+        String query = "SELECT COUNT(*) FROM vote WHERE sessionId = ?";
+        boolean hasVoted = false;
+        PreparedStatement preparedStatement = new DBConnection().getStatement(query);
+
+        try{
+            preparedStatement.setString(1, sessionId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            // If the result set has a row, the user has already voted
+            if (resultSet.next() && resultSet.getInt(1) > 0) {
+                hasVoted = true;
+            }
+
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return hasVoted;
+    }
+
+    //insert votes when user voted
+    public void insertVote(Vote vote){
+        String query = "Insert into vote (sessionId, candidateId) values(?,?)";
+        PreparedStatement preparedStatement = new DBConnection().getStatement(query);
+
+        try{
+            preparedStatement.setString(1, vote.getSessionId());
+            preparedStatement.setInt(2, vote.getCandidateId());
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    //deleting session
+    public void deleteSession(){
+        String query = "Truncate table vote";
+        PreparedStatement preparedStatement = new DBConnection().getStatement(query);
+
+        try{
+            preparedStatement.executeUpdate();
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    //deleting candidate table data
+    public void deleteCandidateTable(){
+        String query = "Truncate table candidate";
+        PreparedStatement preparedStatement = new DBConnection().getStatement(query);
+
+        try{
+            preparedStatement.executeUpdate();
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    //get total voters
+    public int totalVoters(){
+        int totalVote = 0;
+        String query ="SELECT COUNT(DISTINCT voteId) FROM vote";
+        PreparedStatement preparedStatement = new DBConnection().getStatement(query);
+        try{
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                totalVote = resultSet.getInt(1);
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return totalVote;
+    }
 
 }
