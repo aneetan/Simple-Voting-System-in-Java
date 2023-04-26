@@ -29,7 +29,7 @@
 </head>
 <body>
     <%@ include file="essentials/nav.jsp"%>
-    <div class="election-content" style="margin: 10px 20px 0 50px" >
+    <div class="election-content" style="margin: 100px 20px 0 50px" >
         <h2>Your <span style="color: #0080ff"> Vote,</span>
             Your <span> Voice</span> </h2>
         <p style="color: #707070"> Please secure your valid vote by reading rules of this election.</p>
@@ -48,7 +48,7 @@
                             <li class="list-group-item"> <i class='bx bx-calendar-alt'></i> ${election.electionDate}</li>
                         </ul>
                         <div class="card-body">
-                            <a href="#" class="card-link">See Details</a>
+                            <a href="vote?page=seeElec" class="card-link">See Details</a>
                         </div>
                     </div>
                 </div>

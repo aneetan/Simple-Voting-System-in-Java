@@ -30,9 +30,13 @@
                 <div class="left">
                     <h1>Create an election</h1>
                 </div>
+
             </div>
 
             <div class="wrapper">
+                <% if (request.getAttribute("error") != null) { %>
+                <div class="error" style="color: #ff3860;" id="error-message"><%= request.getAttribute("error") %></div>
+                <% } %>
                 <div class="title">
                     Please fill the Details
                 </div>
@@ -50,14 +54,16 @@
 
 
                     <div class="inputfield">
-                        <label>Candidancy for</label>
-                        <div class="custom_select">
-                            <select name="candidacy">
-                                <option value="" disabled selected>Select</option>
-                                <option value="Semester II(A)">Semester II(A)</option>
-                                <option value="Semester II(B)">Semester II(B)</option>
-                            </select>
-                        </div>
+                        <label> Short Description</label>
+                            <input type="text" name="candidacy" class="input" placeholder="What election is for?" required>
+
+<%--                        <div class="custom_select">--%>
+<%--                            <select name="candidacy">--%>
+<%--                                <option value="" disabled selected>Select</option>--%>
+<%--                                <option value="Semester II(A)">Semester II(A)</option>--%>
+<%--                                <option value="Semester II(B)">Semester II(B)</option>--%>
+<%--                            </select>--%>
+<%--                        </div>--%>
                     </div>
 
                     <div class="inputfield">

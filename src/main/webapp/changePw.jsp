@@ -46,7 +46,7 @@
 <body style="background: #fff">
 <%@ include file="essentials/nav.jsp"%>
 
-<div class="containerPro" style="background: none">
+<div class="containerPro" style="background: none; margin: 100px 20px 0 50px">
     <div class="row">
         <div class="col-md mt-1">
             <div class="card text-center sidebar">
@@ -80,13 +80,15 @@
                     <input type="hidden" name="id" value="${votingSystem.id}">
 
                     <div class="input-field">
-                        <label> New password</label>
+                        <label> New password</label> <br>
                         <input id="newPassword" name="newPassword" type="password" placeholder="Enter new password" required>
+                        <div class="error" style="color: red; font-size: 10px"></div>
                     </div>
 
                     <div class="input-field">
-                        <label> Confirm password</label>
+                        <label> Confirm password</label> <br>
                         <input id="confirmPassword" name="confirmPassword" type="password" placeholder="Confirm password" required>
+                        <div class="error" style="color: red; font-size: 10px"></div>
                     </div>
 
                     <input type="submit" value="Update" class="btnText">

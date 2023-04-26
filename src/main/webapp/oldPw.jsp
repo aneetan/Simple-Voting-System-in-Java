@@ -46,7 +46,7 @@
 <body style="background: #fff">
 <%@ include file="essentials/nav.jsp"%>
 
-<div class="containerPro" style="background: none">
+<div class="containerPro" style="background: none; margin: 100px 20px 0 50px;">
     <div class="row">
         <div class="col-md mt-1">
             <div class="card text-center sidebar">

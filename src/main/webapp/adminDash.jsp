@@ -43,22 +43,22 @@
                 <li>
                     <i class='bx bx-user-check'></i>
                     <span class="text">
-                            <h3>4</h3>
+                            <h3>${totalCandidates}</h3>
                             <p>Candidates</p>
                         </span>
                 </li>
                 <li>
                     <i class='bx bxs-group' ></i>
                     <span class="text">
-                            <h3>200</h3>
+                            <h3>${totalUsers}</h3>
                             <p>User Login</p>
                         </span>
                 </li>
                 <li>
                     <i class='bx bxs-message-square-check'></i>
                     <span class="text">
-                            <h3>2</h3>
-                            <p>Elections Held</p>
+                            <h3>${totalVoters}</h3>
+                            <p> Vote Count</p>
                         </span>
                 </li>
             </ul>
@@ -99,26 +99,26 @@
                 <div class="todo">
                     <div class="head">
                         <h3>Recent Elections</h3>
-                        <i class='bx bx-plus' ></i>
+<%--                        <i class='bx bx-plus' ></i>--%>
                     </div>
 
-                    <c:forEach items="${electionList}" var="election">
+                    <c:forEach items="${electionList}" var="electionList">
 
-                    <div class="card" style="width: 15rem;">
-                        <img src="uploadimage//${election.imageFileName}" class="card-img-top" alt="election-img">
-                        <div class="card-body">
-                            <h5 class="card-title"> ${election.electionName}</h5>
-                            <p class="card-text">${election.candidacy}</p>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item"> ${election.electionDate}</li>
-                        </ul>
-                        <div class="card-body">
-                            <a href="vote?page=deleteElection&EId=${election.EId}" class="card-link">Delete Election</a> <br>
-                            <a href="vote?page=editElection&EId=${election.EId}" class="card-link">Edit Election</a>
+                            <div class="card" style="width: 15rem;">
+                                <img src="uploadimage//${electionList.imageFileName}" class="card-img-top" alt="election-img">
+                                <div class="card-body">
+                                    <h5 class="card-title"> ${electionList.electionName}</h5>
+                                    <p class="card-text">${electionList.candidacy}</p>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item"> ${electionList.electionDate}</li>
+                                </ul>
+                                <div class="card-body">
+                                    <a href="vote?page=deleteElection&EId=${electionList.EId}" class="card-link">Delete Election</a> <br>
+                                    <a href="vote?page=editElection&EId=${electionList.EId}" class="card-link">Edit Election</a>
 
-                        </div>
-                    </div>
+                                </div>
+                            </div>
                     </c:forEach>
                 </div>
             </div>

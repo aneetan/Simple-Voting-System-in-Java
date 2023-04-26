@@ -32,6 +32,16 @@
       background-color: #3085db;
 
     }
+    .navbar {
+      background: #0080ff;
+      position: fixed;
+      font-family: 'Poppins', sans-serif;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 999;
+    }
+
     li{
       list-style: none;
     }
@@ -44,15 +54,14 @@
       margin-left: 6px;
     }
 
-    .navbar{
-      font-family: 'Poppins', sans-serif;
-      min-height: 70px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 24px;
-
-    }
+    /*.navbar{*/
+    /*  font-family: 'Poppins', sans-serif;*/
+    /*  min-height: 70px;*/
+    /*  display: flex;*/
+    /*  justify-content: space-between;*/
+    /*  align-items: center;*/
+    /*  padding: 0 24px;*/
+    /*}*/
 
     .nav-menu{
       display: flex;
@@ -117,9 +126,10 @@
       .nav-item{
         margin: 16px 0;
       }
-      .nav-menu.active{
-        left:0;
+      .nav-item .nav-link.activeLink {
+        color: #1414ce;
       }
+
 
     }
   </style>
@@ -130,19 +140,19 @@
     <a href="#" class="nav-branding"><img src="img/votelogo.png" alt="logo" width="40px"> VoteNow</a>
     <ul class="nav-menu">
       <li class="nav-item">
-        <a href="vote?page=election" class="nav-link" style="color: white ;">Election</a>
+        <a href="vote?page=election" class="nav-link activeLink" style="color: #1414ce;">Election</a>
       </li>
       <li class="nav-item">
-        <a href="vote?page=rules" class="nav-link" style="color: white ;" >Rules</a>
+        <a href="vote?page=rules" class="nav-link" >Rules</a>
       </li>
       <li class="nav-item">
-        <a href="vote?page=candidateCard" class="nav-link" style="color: white ;" >Vote</a>
+        <a href="vote?page=candidateCard" class="nav-link">Vote</a>
       </li>
       <li class="nav-item">
-        <a href="vote?page=resultUser" class="nav-link" style="color: white ;">View Result</a>
+        <a href="vote?page=resultUser" class="nav-link">View Result</a>
       </li>
       <li class="nav-item">
-        <a href="vote?page=userProfile&id=${votingSystem.id}" class="nav-link" style="color: white ;" >Profile</a>
+        <a href="vote?page=userProfile&id=${votingSystem.id}" class="nav-link" >Profile</a>
       </li>
 
     </ul>
@@ -165,10 +175,27 @@
     navMenu.classList.toggle("active");
   })
 
-  document.querySelector(".nav-link").forEach(n => n.addEventListener("click", () => {
-    hamburger.classList.remove("active");
-    navMenu.classList.remove("active");
-  }))
+  // document.querySelector(".nav-link").forEach(n => n.addEventListener("click", () => {
+  //   hamburger.classList.remove("active");
+  //   navMenu.classList.remove("active");
+  // }))
+
+  // Get all the links in the navbar
+  const links = document.querySelectorAll('.nav-item .nav-link');
+
+  // Add an event listener to each link
+  links.forEach(link => {
+    link.addEventListener('click', () => {
+      // Remove the "active" class from all links
+      links.forEach(link => {
+        link.classList.remove('activeLink');
+      });
+
+      // Add the "active" class to the clicked link
+      link.classList.add('activeLink');
+    });
+  });
+
 </script>
 </body>
 </html>

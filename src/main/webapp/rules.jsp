@@ -23,11 +23,16 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <title>Rules</title>
+    <style>
+        body{
+            font-family: "Poppins", sans-serif;
+        }
+    </style>
 </head>
 <body>
 <%@ include file="essentials/nav.jsp"%>
 
-    <ol class="list-group list-group-numbered">
+    <ol class="list-group list-group-numbered" style="margin: 100px 20px 0 10px">
         <li class="list-group-item"> Before you start voting, make sure that you have verified your identity.</li>
         <li class="list-group-item"> Protect your login credentials and do not share them with anyone.</li>
         <li class="list-group-item"> You can vote only one person from the candidates.</li>

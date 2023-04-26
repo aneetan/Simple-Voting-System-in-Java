@@ -78,11 +78,13 @@
 
                                 <div class="input-field">
                                     <label>Specify Candidacy</label>
-                                    <select name="candidate" required>
-                                        <option disabled selected>Specify</option>
-                                        <option value="Semester II(A)">Semester II(A)</option>
-                                        <option value="Semester II(B)">Semester II(B)</option>
-                                    </select>
+                                        <input name="candidate" type="text" placeholder="Eg. Mayor" required>
+
+                                <%--                                    <select name="candidate" required>--%>
+<%--                                        <option disabled selected>Specify</option>--%>
+<%--                                        <option value="Semester II(A)">Semester II(A)</option>--%>
+<%--                                        <option value="Semester II(B)">Semester II(B)</option>--%>
+<%--                                    </select>--%>
                                 </div>
                             </div>
                         </div>
@@ -92,7 +94,7 @@
                             <textarea name="experience" class="textarea" placeholder="Enter past works and experience here" required></textarea>
                         </div>
                         <div class="input-field">
-                            <label>Age</label>
+                            <label></label>
                             <input id="vote"  name="vote" type="hidden" value="0" required>
                         </div>
 

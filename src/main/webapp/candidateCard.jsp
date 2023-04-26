@@ -16,6 +16,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/candidateCard.css">
+
     <anyxmlelement xmlns:c="http://java.sun.com/jsp/jstl/core" />
 
 
@@ -41,7 +42,7 @@
 <div class="error" style="color: #ff3860;" id="error-message"><%= request.getAttribute("errorMessage") %></div>
 <% } %>
 
-    <div class="profile-area">
+    <div class="profile-area" style="margin: 50px 20px 0 10px">
       <div class="containerCard" style="margin: 2px 20px 0 50px">
         <div class="row">
             <c:forEach items="${candidateList}" var="candidate">
@@ -52,7 +53,7 @@
                       <div class="img2"> <img src="candidateProfile//${candidate.candidateProfile}" alt=""></div>
                       <div class="main-text">
                         <h2> ${candidate.fullNameCandidate}</h2>
-                        <p> ${candidate.experience}</p>
+                        <p> Age: ${candidate.ageCandidate}</p>
                       </div>
                       <a href="vote?page=seeCandidateDetails&canId=${candidate.canId}"> See more </a>
 <%--                          <input type="submit" id="votebtn" class="btn-vote" value="Vote Now">--%>
@@ -60,10 +61,9 @@
                               <button class="btn-vote" onclick="disableVoteButtons()" id="votebtn">Vote Now</button>
                           </a>
                       <hr>
-
-                      <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="(${candidate.votes}/ ${totalVoters})" aria-valuemin="0" aria-valuemax="${totalVoters}">(${candidate.votes}/ ${totalVoters})</div>
-                      </div>
+                          <div class="progress">
+                              <div class="progress-bar" role="progressbar" style="width: ${Math.round(candidate.votes/totalVoters*100)}%" aria-valuenow="${Math.round(candidate.votes/totalVoters*100)}" aria-valuemin="0" aria-valuemax="100">${candidate.votes/totalVoters*100}%</div>
+                          </div>
 
                     </div>
 

@@ -5,11 +5,13 @@
   Time: 12:39 AM
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <anyxmlelement xmlns:c="http://java.sun.com/jsp/jstl/core" />
 
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
@@ -35,8 +37,8 @@
                 <c:forEach items="${candidateList}" var="candidate">
 
                     <p> ${candidate.fullNameCandidate}</p>
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="(${candidate.votes}/ ${totalVoters})*100" aria-valuemin="0" aria-valuemax="100">(${candidate.votes}/ ${totalVoters})*100</div>
+                    <div class="progress" style="margin-right: 40px">
+                        <div class="progress-bar" role="progressbar" style="width: ${Math.round(candidate.votes/totalVoters*100)}%" aria-valuenow="${Math.round(candidate.votes/totalVoters*100)}" aria-valuemin="0" aria-valuemax="100">${candidate.votes/totalVoters*100}%</div>
                     </div>
                 </c:forEach>
             </div>

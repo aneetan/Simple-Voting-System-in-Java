@@ -15,12 +15,19 @@
     <anyxmlelement xmlns:c="http://java.sun.com/jsp/jstl/core" />
 
     <link rel="stylesheet" href="css/candidateProfile.css">
+    <link rel="stylesheet" href="css/result.css">
+
 
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <title>Details Candidate</title>
+    <style>
+        .progress-bar{
+            background: #0080ff;
+        }
+    </style>
 </head>
 <body>
     <div class="wrapper">
@@ -65,10 +72,11 @@
                 <div class="projects_data">
                     <p> ${candidate.experience}</p>
                 </div>
+
             </div>
 
             <div class="progress" style="margin-bottom: 20px;">
-                <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="(${candidate.votes}/ ${totalVoters})*100" aria-valuemin="0" aria-valuemax="100">(${candidate.votes}/ ${totalVoters})*100</div>
+                <div class="progress-bar" role="progressbar" style="width: ${Math.round(candidate.votes/totalVoters*100)}%" aria-valuenow="${Math.round(candidate.votes/totalVoters*100)}" aria-valuemin="0" aria-valuemax="100">${candidate.votes/totalVoters*100}%</div>
             </div>
 
             <!-- <button class="btnVote" id="votebtn"> Edit Details</button> -->

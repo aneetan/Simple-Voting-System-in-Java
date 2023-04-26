@@ -442,24 +442,6 @@ public class VotingService {
     }
 
 
-    //get total users
-    public  int getTotalUsers() {
-        int total = 0;
-        String query = "select count(*) as total from voter";
-        PreparedStatement preparedStatement = new DBConnection().getStatement(query);
-
-        try {
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            if (resultSet.next()) {
-                total = resultSet.getInt("total");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return total;
-    }
-
 
     //deleting user from database
     public void deleteUser(int id) {
@@ -517,6 +499,7 @@ public class VotingService {
                 candidate.setGenderCandidate(resultSet.getString("genderCandidate"));
                 candidate.setCandidate(resultSet.getString("candidate"));
                 candidate.setExperience(resultSet.getString("experience"));
+                candidate.setVotes(resultSet.getInt("votes"));
             }
         } catch (SQLException e){
             e.printStackTrace();
@@ -612,6 +595,54 @@ public class VotingService {
             e.printStackTrace();
         }
         return totalVote;
+    }
+
+    //get total users
+    public int totalUsers(){
+        int totalUser = 0;
+        String query ="SELECT COUNT(DISTINCT id) FROM voter";
+        PreparedStatement preparedStatement = new DBConnection().getStatement(query);
+        try{
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                totalUser = resultSet.getInt(1);
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return totalUser;
+    }
+
+    //get total candidates
+    public int totalCandidates(){
+        int totalCandidate = 0;
+        String query ="SELECT COUNT(DISTINCT canId) FROM candidate";
+        PreparedStatement preparedStatement = new DBConnection().getStatement(query);
+        try{
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                totalCandidate = resultSet.getInt(1);
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return totalCandidate;
+    }
+
+    //get total candidates
+    public int countElection(){
+        int total = 0;
+        String query ="SELECT COUNT(DISTINCT EId) FROM election";
+        PreparedStatement preparedStatement = new DBConnection().getStatement(query);
+        try{
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                total = resultSet.getInt(1);
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return total;
     }
 
 }

@@ -20,12 +20,12 @@
 <body>
   <%@ include file="essentials/nav.jsp"%>
 
-  <div class="containerP" style="margin: 10px 20px 0 50px">
+  <div class="containerP" style="margin: 100px 20px 0 50px">
   <c:forEach items="${candidateList}" var="candidate">
 
-  <p> ${candidate.fullNameCandidate}</p>
+  <p style="font-weight: 600; font-size: 24px"> ${candidate.fullNameCandidate}</p>
       <div class="progress">
-        <div class="progress-bar" role="progressbar" aria-valuenow="(${candidate.votes}/ ${totalVoters})*100" aria-valuemin="0" aria-valuemax="100">(${candidate.votes}/ ${totalVoters})*100</div>
+        <div class="progress-bar" role="progressbar" style="width: ${Math.round(candidate.votes/totalVoters*100)}%" aria-valuenow="${Math.round(candidate.votes/totalVoters*100)}" aria-valuemin="0" aria-valuemax="100">${candidate.votes/totalVoters*100}%</div>
       </div>
   </c:forEach>
   </div>
