@@ -27,6 +27,9 @@
         <%@ include file="essentials/sidebar.jsp"%>
 
         <section id="content">
+            <nav>
+                <i class='bx bx-menu' ></i>
+            </nav>
 
             <main>
                 <div class="head-title">
@@ -43,8 +46,8 @@
                             <input type="hidden" name="canId" value="${candidate.canId}">
 
                             <div class="input-field photo-upload">
-                                <img src="candidateProfile//${candidate.candidateProfile}" alt="Choose photo"> <br>
-                                <input type="file" id="profileCan" class="img-file" name="profileCandidate">
+                                <img src="candidateProfile//${candidate.candidateProfile}" id="profileCan" alt="Choose photo"> <br>
+                                <input type="file"  id="editCandi" class="img-file" name="profileCandidate">
                             </div>
                             <div class="details personal">
                                 <!-- <span class="title">Personal Details</span> -->
@@ -83,11 +86,8 @@
 
                                     <div class="input-field">
                                         <label>Specify Candidacy</label>
-                                        <select name="candidate" required>
-                                            <option disabled selected>Specify</option>
-                                            <option value="Semester II(A)">Semester II(A)</option>
-                                            <option value="Semester II(B)">Semester II(B)</option>
-                                        </select>
+                                        <input id="candidacy" name="candidate" type="text" value="${candidate.candidate}" required>
+
                                     </div>
                                 </div>
                             </div>
@@ -114,12 +114,16 @@
 
         <script>
             //changing the image to file option
-            const img = document.getElementById("profileCan");
-            input = document.querySelector("input");
+            document.addEventListener('DOMContentLoaded', function() {
+                const img = document.getElementById("profileCan");
+                const input = document.getElementById("editCandi");
 
-            input.addEventListener("change", () => {
-                img.src = URL.createObjectURL(input.files[0]);
-            })
+
+                input.addEventListener("change", () => {
+                    img.src = URL.createObjectURL(input.files[0]);
+                })
+            });
+
         </script>
 </body>
 </html>

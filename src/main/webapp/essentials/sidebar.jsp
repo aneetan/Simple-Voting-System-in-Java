@@ -22,14 +22,16 @@
 </head>
 <body>
     <section id="sidebar">
+
         <a href="#" class="brand">
-            <img src="../img/blue_logo.png" alt="logo" width="50px">
+            <img src="img/blue.png" alt="logo" width="50px">
             <span class="text">VoteNow</span>
         </a>
+
         <ul class="side-menu top">
-            <li class="active">
+            <li class="active" >
                 <a href="vote?page=dashboard">
-                    <i class='bx bxs-dashboard' ></i>
+                    <i class='bx bxs-dashboard'></i>
                     <span class="text">Dashboard</span>
                 </a>
             </li>
@@ -71,27 +73,51 @@
 
 <%--<script src="admin.js"></script>--%>
 <script>
-    const allSideMenu = document.querySelectorAll('#sidebar .side-menu.top li a');
+    document.addEventListener('DOMContentLoaded', function() {
 
-    allSideMenu.forEach(item=> {
-        const li = item.parentElement;
+        const allSideMenu = document.querySelectorAll('#sidebar ul li a');
+         // let activeLink = localStorage.getItem('activeLink');
 
-        item.addEventListener('click', function () {
-            allSideMenu.forEach(i=> {
-                i.parentElement.classList.remove('active');
+        allSideMenu.forEach(item=> {
+            const li = item.closest('li');
+
+            item.addEventListener('click', function (event) {
+                event.preventDefault();
+
+                const link = item.getAttribute('href');
+                localStorage.setItem('activeLink', link);
+
+                // Navigate to the new page
+                window.location.href = link;
             })
-            li.classList.add('active');
+        });
+
+        // Highlight the active link when the page is reloaded
+        const currentUrl = window.location.href;
+
+        allSideMenu.forEach(item => {
+
+            if (item.href === currentUrl) {
+                allSideMenu.forEach(l => l.parentElement.classList.remove('active'));
+                const li = item.closest('li');
+                li.classList.add('active');
+
+            }
+        });
+
+        // TOGGLE SIDEBAR
+        const menuBar = document.querySelector('#content nav .bx.bx-menu');
+        const sidebar = document.getElementById('sidebar');
+
+        menuBar.addEventListener('click', function () {
+            sidebar.classList.toggle('hide');
         })
     });
 
 
-    // TOGGLE SIDEBAR
-    const menuBar = document.querySelector('#content nav .bx.bx-menu');
-    const sidebar = document.getElementById('sidebar');
 
-    menuBar.addEventListener('click', function () {
-        sidebar.classList.toggle('hide');
-    })
+
+
 
 
 

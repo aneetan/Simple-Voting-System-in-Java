@@ -744,7 +744,7 @@ public class HelloServlet extends HttpServlet {
             int id = Integer.parseInt(request.getParameter("id"));
             VotingSystem vs = new VotingSystem();
 
-            Part file = request.getPart("userPro");
+            Part file = request.getPart("newUserPro");
             String imageFileName = file.getSubmittedFileName();
 
             String uploadPath = "C://Users//DELL//IdeaProjects//VotingSystem//src//main//webapp//userProfile//" + imageFileName;

@@ -36,8 +36,8 @@
         <div class="form first">
             <div class="photo-upload" style="text-align: center;
     margin-bottom: 4px;">
-                <img src="img/img.png" alt="Choose photo" style="height: 60px; width: 60px; border-radius: 50%"> <br>
-                <input type="file" id="profileUser" class="img-file" name="userProfile">
+                <img src="img/img.png" id="profileUser" alt="Choose photo" style="height: 60px; width: 60px; border-radius: 50%"> <br>
+                <input type="file" id="userProfile" class="img-file" name="userProfile">
             </div>
             <div class="details personal">
                 <span class="title">Personal Details</span>
@@ -97,12 +97,15 @@
 
 <script>
     //changing the image to file option
-    const img = document.getElementById("profileUser");
-    input = document.querySelector("input");
+    document.addEventListener('DOMContentLoaded', function() {
+        const img = document.getElementById("profileUser");
+        const input = document.getElementById("userProfile");
 
-    input.addEventListener("change", () => {
-        img.src = URL.createObjectURL(input.files[0]);
-    })
+        input.addEventListener("change", () => {
+            img.src = URL.createObjectURL(input.files[0]);
+        });
+    });
+
 </script>
 </body>
 </html>

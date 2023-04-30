@@ -27,6 +27,9 @@
     <%@ include file="essentials/sidebar.jsp"%>
 
     <section id="content">
+        <nav>
+            <i class='bx bx-menu' ></i>
+        </nav>
 
       <main>
         <div class="head-title">
@@ -45,7 +48,7 @@
               <p class="photo">Select cover photo</p>
             <div class="inputfield">
               <img src="uploadimage//${election.imageFileName}" id="profile" alt="Choose photo"> <br>
-              <input type="file" class="img-file" name="profile" value="${election.imageFileName}">
+              <input type="file" class="img-file" name="profile" id="electionProfile" value="${election.imageFileName}">
             </div>
 
             <div class="inputfield">
@@ -54,15 +57,9 @@
             </div>
 
             <div class="inputfield">
-              <label>Candidancy for</label>
-              <div class="custom_select">
-                <select name="candidacy" value="${election.candidacy}">
+              <label>Short Description</label>
+                <input type="text" name="candidacy" class="input" value="${election.candidacy}" required>
 
-                    <option value="" disabled selected>Select</option>
-                  <option value="Semester II(A)">Semester II(A)</option>
-                  <option value="Semester II(B)">Semester II(B)</option>
-                </select>
-              </div>
             </div>
 
             <div class="inputfield">
@@ -84,12 +81,16 @@
 
     <script>
       //changing the image to file option
-      const img = document.getElementById("profile");
-      input = document.querySelector("input");
+      document.addEventListener('DOMContentLoaded', function() {
+          const img = document.getElementById("profile");
+          const input = document.getElementById("electionProfile");
 
-      input.addEventListener("change", () => {
-        img.src = URL.createObjectURL(input.files[0]);
-      })
+
+          input.addEventListener("change", () => {
+              img.src = URL.createObjectURL(input.files[0]);
+          })
+      });
+
     </script>
 </body>
 </html>

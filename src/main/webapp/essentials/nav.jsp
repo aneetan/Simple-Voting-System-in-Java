@@ -74,7 +74,9 @@
       margin-top: 12px;
       transition: 0.7s ease;
       font-size: 18px;
-      color: white;
+      color: #cadff3;
+
+      /*color: white;*/
     }
 
     .nav-link:hover{
@@ -94,6 +96,9 @@
       margin: 5px auto;
       -webkit-transition: all 0.3s ease-in-out;
       background-color: white;
+    }
+    .navbar ul li.activeLinks a{
+      color: white;
     }
 
     @media(max-width: 768px){
@@ -126,21 +131,20 @@
       .nav-item{
         margin: 16px 0;
       }
-      .nav-item .nav-link.activeLink {
-        color: #1414ce;
+      .navbar ul li a{
+        color: #cadff3;
       }
-
 
     }
   </style>
 </head>
 <body>
 <header>
-  <nav class="navbar">
+  <nav class="navbar" id="navbar">
     <a href="#" class="nav-branding"><img src="img/votelogo.png" alt="logo" width="40px"> VoteNow</a>
     <ul class="nav-menu">
-      <li class="nav-item">
-        <a href="vote?page=election" class="nav-link activeLink" style="color: #1414ce;">Election</a>
+      <li class="nav-item activeLinks">
+        <a href="vote?page=election" class="nav-link">Election</a>
       </li>
       <li class="nav-item">
         <a href="vote?page=rules" class="nav-link" >Rules</a>
@@ -152,7 +156,7 @@
         <a href="vote?page=resultUser" class="nav-link">View Result</a>
       </li>
       <li class="nav-item">
-        <a href="vote?page=userProfile&id=${votingSystem.id}" class="nav-link" >Profile</a>
+        <a href="vote?page=userProfile" class="nav-link" >Profile</a>
       </li>
 
     </ul>
@@ -167,33 +171,48 @@
 </header>
 
 <script>
-  const hamburger = document.querySelector(".hamburger");
-  const navMenu = document.querySelector(".nav-menu");
 
-  hamburger.addEventListener("click", () =>{
-    hamburger.classList.toggle("active");
-    navMenu.classList.toggle("active");
-  })
 
-  // document.querySelector(".nav-link").forEach(n => n.addEventListener("click", () => {
-  //   hamburger.classList.remove("active");
-  //   navMenu.classList.remove("active");
-  // }))
+  document.addEventListener('DOMContentLoaded', function() {
 
-  // Get all the links in the navbar
-  const links = document.querySelectorAll('.nav-item .nav-link');
+    const allSideMenu = document.querySelectorAll('.navbar ul li a');
+    // let activeLink = localStorage.getItem('activeLink');
 
-  // Add an event listener to each link
-  links.forEach(link => {
-    link.addEventListener('click', () => {
-      // Remove the "active" class from all links
-      links.forEach(link => {
-        link.classList.remove('activeLink');
-      });
+    allSideMenu.forEach(item=> {
+      const li = item.closest('li');
 
-      // Add the "active" class to the clicked link
-      link.classList.add('activeLink');
+      item.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        const link = item.getAttribute('href');
+        localStorage.setItem('activeLink', link);
+
+        // Navigate to the new page
+        window.location.href = link;
+      })
     });
+
+    // Highlight the active link when the page is reloaded
+    const currentUrl = window.location.href;
+
+    allSideMenu.forEach(item => {
+
+      if (item.href === currentUrl) {
+        allSideMenu.forEach(l => l.parentElement.classList.remove('activeLinks'));
+        const li = item.closest('li');
+        li.classList.add('activeLinks');
+
+      }
+    });
+
+    // TOGGLE SIDEBAR
+    const hamburger = document.querySelector(".hamburger");
+    const navMenu = document.querySelector(".nav-menu");
+
+    hamburger.addEventListener("click", () =>{
+      hamburger.classList.toggle("active");
+      navMenu.classList.toggle("active");
+    })
   });
 
 </script>

@@ -80,8 +80,8 @@
                                 <input type="hidden" name="id" value="${votingSystem.id}">
 
                                 <div class="photo-upload">
-                                        <img src="userProfile//${votingSystem.userProfile}" alt="Choose photo" style="height: 60px; width: 60px; border-radius: 50%"> <br>
-                                        <input type="file" id="image" class="img-file" name="userPro">
+                                        <img  src="userProfile//${votingSystem.userProfile}" id="imageEdit" alt="Choose photo" style="height: 60px; width: 60px; border-radius: 50%"> <br>
+                                        <input type="file" id="editU" class="img-file" name="newUserPro">
                                     </div>
 
                                     <div class="input-field">
@@ -142,12 +142,16 @@
 
     <script>
         //changing the image to file option
-        const img = document.getElementById("image");
-        input = document.querySelector("input");
+        document.addEventListener('DOMContentLoaded', function() {
+            const img = document.getElementById("imageEdit");
+            const input = document.getElementById("editU");
 
-        input.addEventListener("change", () => {
-            img.src = URL.createObjectURL(input.files[0]);
-        })
+
+            input.addEventListener("change", () => {
+                img.src = URL.createObjectURL(input.files[0]);
+            })
+        });
+
     </script>
 </body>
 </html>

@@ -45,17 +45,17 @@ li{
     gap: 60px;
 }
 
-.nav-link{
-    margin-top: 12px;
-    transition: 0.7s ease;
-    font-size: 18px;
-    color: white;
-}
+/*.nav-link{*/
+/*    margin-top: 12px;*/
+/*    transition: 0.7s ease;*/
+/*    font-size: 18px;*/
+/*    color: white;*/
+/*}*/
 
-.nav-link:hover{
-    color: white;
+/*.nav-link:hover{*/
+/*    color: white;*/
 
-}
+/*}*/
 
 .hamburger{
     display: none;

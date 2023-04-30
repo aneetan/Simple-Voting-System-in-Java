@@ -24,6 +24,9 @@
 <%@ include file="essentials/sidebar.jsp"%>
 
     <section id="content">
+        <nav>
+            <i class='bx bx-menu' ></i>
+        </nav>
 
         <main>
             <div class="head-title">
@@ -38,8 +41,8 @@
                 <form action="vote?page=addCandidateDetails" id="authorizeForm" method="post" enctype="multipart/form-data">
                     <div class="form first">
                         <div class="input-field photo-upload">
-                            <img src="img/img.png" alt="Choose photo"> <br>
-                            <input type="file" id="profileCan" class="img-file" name="profileCandidate">
+                            <img src="img/img.png" id="profileCan" alt="Choose photo"> <br>
+                            <input type="file" id="candiProfile"  class="img-file" name="profileCandidate">
                         </div>
                         <div class="details personal">
                             <!-- <span class="title">Personal Details</span> -->
@@ -114,12 +117,16 @@
 
     <script>
         //changing the image to file option
-        const img = document.getElementById("profileCan");
-        input = document.querySelector("input");
+        document.addEventListener('DOMContentLoaded', function() {
+            const img = document.getElementById("profileCan");
+            const input = document.getElementById("candiProfile");
 
-        input.addEventListener("change", () => {
-            img.src = URL.createObjectURL(input.files[0]);
-        })
+
+            input.addEventListener("change", () => {
+                img.src = URL.createObjectURL(input.files[0]);
+            })
+        });
+
     </script>
 
 </body>

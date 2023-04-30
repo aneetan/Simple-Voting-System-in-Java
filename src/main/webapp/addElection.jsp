@@ -24,6 +24,9 @@
 <%@ include file="essentials/sidebar.jsp"%>
 
     <section id="content">
+        <nav>
+            <i class='bx bx-menu' ></i>
+        </nav>
 
         <main>
             <div class="head-title">

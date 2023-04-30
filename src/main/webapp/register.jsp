@@ -15,6 +15,12 @@
     ></script>
     <link rel="stylesheet" href="css/style.css" />
     <title> Register User</title>
+    <style>
+        .input-field input#DOB{
+            margin-top: 10px;
+        }
+
+    </style>
 </head>
 <body>
     <div class="container">
@@ -67,5 +73,6 @@
     </div>
 
 <script src="app.js"></script>
+
 </body>
 </html>
