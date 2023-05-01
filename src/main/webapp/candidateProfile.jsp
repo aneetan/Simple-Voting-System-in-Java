@@ -66,11 +66,13 @@
       </div>
 
       <div class="progress">
-        <div class="progress-bar" role="progressbar" style="width: ${Math.round(candidate.votes/totalVoters*100)}%" aria-valuenow="${Math.round(candidate.votes/totalVoters*100)}" aria-valuemin="0" aria-valuemax="100">${candidate.votes/totalVoters*100}%</div>
+        <div class="progress-bar" role="progressbar" style="width: ${Math.round(candidate.votes/totalVoters*100)}%" aria-valuenow="${Math.round((candidate.votes/totalVoters)*100)}" aria-valuemin="0" aria-valuemax="100">
+          ${Math.round((candidate.votes/totalVoters)*100)}%
+        </div>
       </div>
 
 
-      <button class="btnVote" id="votebtn"> Vote Now</button>
+<%--      <button class="btnVote" id="votebtn"> Vote Now</button>--%>
       <!-- <input type="submit" value="Vote Now" class="btn" id="votebtn"> -->
 
     </div>

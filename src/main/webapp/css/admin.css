@@ -208,7 +208,7 @@ ul {
     font-family: var(--poppins);
     max-height: calc(100vh - 56px);
     overflow-y: auto;
-    margin-left: 32px;
+
 }
 #content main .head-title {
     display: flex;
@@ -367,7 +367,7 @@ ul {
     max-width: 500px;
     width: 100%;
     background: #fff;
-    margin: 50px auto;
+    margin: 5px auto;
     box-shadow: 2px 2px 4px rgba(0,0,0,0.125);
     padding: 30px;
 }
@@ -491,15 +491,10 @@ ul {
 }
 
 
-
-
-
-
-
-
 @media screen and (max-width: 768px) {
     #sidebar {
         width: 200px;
+        z-index: 10000;
     }
 
     #content {
@@ -573,7 +568,7 @@ ul {
     margin-top: 10px;
     min-height: 610px;
     background-color: #fff;
-    width: 75%;
+    width: 90%;
     padding: 2rem;
     overflow: hidden;
 }
@@ -597,8 +592,8 @@ ul {
 .container form .fields{
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    /*justify-content: space-between;*/
+    /*flex-wrap: wrap;*/
 }
 form .fields .input-field{
     display: flex;

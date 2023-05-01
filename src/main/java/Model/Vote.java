@@ -3,6 +3,8 @@ package Model;
 public class Vote {
     private int voteId;
     private String sessionId;
+
+    private int userId;
     private int candidateId;
 
     public int getVoteId() {
@@ -19,6 +21,14 @@ public class Vote {
 
     public void setSessionId(String sessionId) {
         this.sessionId = sessionId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public int getCandidateId() {

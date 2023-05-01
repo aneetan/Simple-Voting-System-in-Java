@@ -41,7 +41,10 @@
 
                     <p> ${candidate.fullNameCandidate}</p>
                     <div class="progress" style="margin-right: 40px">
-                        <div class="progress-bar" role="progressbar" style="width: ${Math.round(candidate.votes/totalVoters*100)}%" aria-valuenow="${Math.round(candidate.votes/totalVoters*100)}" aria-valuemin="0" aria-valuemax="100">${candidate.votes/totalVoters*100}%</div>
+                        <div class="progress-bar" role="progressbar" style="width: ${Math.round(candidate.votes/totalVoters*100)}%" aria-valuenow="${Math.round((candidate.votes/totalVoters)*100)}" aria-valuemin="0" aria-valuemax="100">
+                            ${Math.round((candidate.votes/totalVoters)*100)}%
+
+                        </div>
                     </div>
                 </c:forEach>
             </div>

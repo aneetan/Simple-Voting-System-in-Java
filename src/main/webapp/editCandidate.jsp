@@ -22,6 +22,21 @@
     <link rel="stylesheet" href="css/admin.css" />
 
     <title> Edit Candidate</title>
+    <style>
+        .container form{
+            position: relative;
+            margin-top: 10px;
+            min-height: 610px;
+            background-color: #fff;
+            width: 90%;
+            padding: 2rem;
+            overflow: hidden;
+        }
+        .container form .fields{
+            display: flex;
+            align-items: center;
+        }
+    </style>
 </head>
 <body>
         <%@ include file="essentials/sidebar.jsp"%>

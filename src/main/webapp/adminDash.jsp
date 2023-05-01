@@ -30,7 +30,7 @@
             <i class='bx bx-menu' ></i>
         </nav>
 
-        <main>
+        <main style="margin-right: 5px;">
             <div class="head-title">
                 <div class="left">
                     <h1>Welcome Admin!</h1>

@@ -7,6 +7,13 @@
     <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/style.css" />
     <title> Login User</title>
+    <style>
+        input:focus,
+        input::placeholder{
+            color: #232323;
+        }
+
+    </style>
 </head>
 <body>
     <div class="container">

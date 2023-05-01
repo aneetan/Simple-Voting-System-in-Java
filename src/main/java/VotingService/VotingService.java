@@ -103,6 +103,7 @@ public class VotingService {
 
     }
 
+    //adding election in database
     public void addElection(Election election) {
         String query = "INSERT INTO Election(imageFileName, electionName, candidacy, electionDate)" + "values(?,?,?,?)";
         PreparedStatement preparedStatement = new DBConnection().getStatement(query);
@@ -120,6 +121,7 @@ public class VotingService {
         }
     }
 
+    //adding candidate in database
     public void addCandidate(Candidate candidate) {
         String query = "INSERT INTO candidate(candidateProfile,fullNameCandidate, emailCandidate, ageCandidate, addressCandidate, genderCandidate, candidate, experience,votes)" + "values(?,?,?,?,?,?,?,?,?)";
         PreparedStatement preparedStatement = new DBConnection().getStatement(query);
@@ -141,6 +143,7 @@ public class VotingService {
         }
     }
 
+    //displaying election list
     public List<Election> getElectionList(){
         ArrayList<Election> electionList = new ArrayList<>();
         String query = "select * from election";
@@ -166,7 +169,7 @@ public class VotingService {
         return electionList;
     }
 
-    //deleting user from database
+    //deleting election from database
     public void deleteElection(int EId) {
         String query = "Delete from election where EId = ?";
         PreparedStatement preparedStatement1 = new DBConnection().getStatement(query);
@@ -198,8 +201,7 @@ public class VotingService {
         }
     }
 
-
-
+    //display election details
     public Election electionDetails(int EId){
         String query = "Select * from election where EId =?";
         PreparedStatement preparedStatement = new DBConnection().getStatement(query);
@@ -221,6 +223,8 @@ public class VotingService {
         }
         return election;
     }
+
+    //display candidate list
     public List<Candidate> getCandidateList(){
         ArrayList<Candidate> candidateList = new ArrayList<>();
         String query = "select * from candidate";
@@ -251,7 +255,7 @@ public class VotingService {
         return candidateList;
     }
 
-    //deleting user from database
+    //deleting candidate from database
     public void deleteCandidate(int canId) {
         String query = "Delete from candidate where canId = ?";
         PreparedStatement preparedStatement1 = new DBConnection().getStatement(query);
@@ -287,6 +291,7 @@ public class VotingService {
 
     }
 
+    //get list of user
     public List<VotingSystem> getUserList(){
         ArrayList<VotingSystem> userList = new ArrayList<>();
         String query = "select * from voter";
@@ -318,6 +323,7 @@ public class VotingService {
         return userList;
     }
 
+    //displaying user details
     public VotingSystem userDetails(int id){
         String query = "Select * from voter where id =?";
         PreparedStatement preparedStatement = new DBConnection().getStatement(query);
@@ -346,12 +352,11 @@ public class VotingService {
         return votingSystem;
     }
 
-    //edit candidate from database
+    //edit user from database
     public void editUser(int id, VotingSystem votingSystem){
         String query= "Update voter set email=?,dob=?,userProfile=?,fullName=?,address=?,gender=?,citizenNo=?,issueDistrict=?,issueDate=?" + " where id=?";
         PreparedStatement preparedStatement = new DBConnection().getStatement(query);
 //        VotingSystem votingSystem = new VotingSystem();
-
 
         try{
             preparedStatement.setString(1, votingSystem.getEmail());
@@ -374,7 +379,7 @@ public class VotingService {
 
     }
 
-    //searching
+    //searching user from list
     public List<VotingSystem> searchUser(String searchQuery){
         ArrayList<VotingSystem> userList = new ArrayList<>();
         String query = "select * from voter where fullName like ?";
@@ -479,6 +484,8 @@ public class VotingService {
         }
         return votingSystem;
     }
+
+    //display candidate details
     public Candidate candidateDetails(int canId){
         String query = "Select * from candidate where canId =?";
         PreparedStatement preparedStatement = new DBConnection().getStatement(query);
@@ -522,13 +529,15 @@ public class VotingService {
     }
 
     //if user has voted
-    public boolean userHasVoted(String sessionId){
-        String query = "SELECT COUNT(*) FROM vote WHERE sessionId = ?";
+    public boolean userHasVoted(String sessionId, int userId){
+        String query = "SELECT COUNT(*) FROM vote WHERE sessionId = ? and userId=?";
         boolean hasVoted = false;
         PreparedStatement preparedStatement = new DBConnection().getStatement(query);
 
         try{
             preparedStatement.setString(1, sessionId);
+            preparedStatement.setInt(2, userId);
+
             ResultSet resultSet = preparedStatement.executeQuery();
 
             // If the result set has a row, the user has already voted
@@ -544,12 +553,13 @@ public class VotingService {
 
     //insert votes when user voted
     public void insertVote(Vote vote){
-        String query = "Insert into vote (sessionId, candidateId) values(?,?)";
+        String query = "Insert into vote (sessionId, userId, candidateId) values(?,?,?)";
         PreparedStatement preparedStatement = new DBConnection().getStatement(query);
 
         try{
             preparedStatement.setString(1, vote.getSessionId());
-            preparedStatement.setInt(2, vote.getCandidateId());
+            preparedStatement.setInt(2, vote.getUserId());
+            preparedStatement.setInt(3, vote.getCandidateId());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e){

@@ -58,13 +58,14 @@ public class HelloServlet extends HttpServlet {
                 requestDispatcher.forward(request, response);
             }
 
+        //authorizing user details
         if (page.equalsIgnoreCase("authorizeUser")) {
             VotingSystem votingSystem = (VotingSystem) request.getSession().getAttribute("votingSystem");
 
             Part file = request.getPart("userProfile");
             String imageFileName = file.getSubmittedFileName();
 
-            String uploadPath = "C://Users//DELL//IdeaProjects//VotingSystem//src//main//webapp//userProfile//" + imageFileName;
+            String uploadPath = "C://Users//Acer//IdeaProjects//VotingSystem//src//main//webapp//userProfile//" + imageFileName;
 
             try{
                 FileOutputStream fileOutputStream = new FileOutputStream(uploadPath);
@@ -235,7 +236,7 @@ public class HelloServlet extends HttpServlet {
                 Part file = request.getPart("profile");
                 String imageFileName = file.getSubmittedFileName();
 
-                String uploadPath = "C://Users//DELL//IdeaProjects//VotingSystem//src//main//webapp//uploadimage//" + imageFileName;
+                String uploadPath = "C://Users//Acer//IdeaProjects//VotingSystem//src//main//webapp//uploadimage//" + imageFileName;
 
                 try {
                     FileOutputStream fileOutputStream = new FileOutputStream(uploadPath);
@@ -300,6 +301,7 @@ public class HelloServlet extends HttpServlet {
             requestDispatcher.forward(request, response);
         }
 
+        //edit election details
         if (page.equalsIgnoreCase("editElectionDetails")) {
             int id = Integer.parseInt(request.getParameter("EId"));
             Election election = new Election();
@@ -307,7 +309,7 @@ public class HelloServlet extends HttpServlet {
             Part file = request.getPart("profile");
             String imageFileName = file.getSubmittedFileName();
 
-            String uploadPath = "C://Users//DELL//IdeaProjects//VotingSystem//src//main//webapp//uploadimage//" + imageFileName;
+            String uploadPath = "C://Users//Acer//IdeaProjects//VotingSystem//src//main//webapp//uploadimage//" + imageFileName;
 
             try{
                 FileOutputStream fileOutputStream = new FileOutputStream(uploadPath);
@@ -396,7 +398,7 @@ public class HelloServlet extends HttpServlet {
             Part file = request.getPart("profileCandidate");
             String imageFileName = file.getSubmittedFileName();
 
-            String uploadPath = "C://Users//DELL//IdeaProjects//VotingSystem//src//main//webapp//candidateProfile//" + imageFileName;
+            String uploadPath = "C://Users//Acer//IdeaProjects//VotingSystem//src//main//webapp//candidateProfile//" + imageFileName;
 
             try{
                 FileOutputStream fileOutputStream = new FileOutputStream(uploadPath);
@@ -432,7 +434,7 @@ public class HelloServlet extends HttpServlet {
             requestDispatcher.forward(request, response);
         }
 
-        //to delete election from database
+        //to delete candidate from database
         if (page.equalsIgnoreCase("deleteCandidate")) {
             int id = Integer.parseInt(request.getParameter("canId"));
             Candidate candidate = new Candidate();
@@ -459,6 +461,7 @@ public class HelloServlet extends HttpServlet {
             requestDispatcher.forward(request, response);
         }
 
+        //edit candidate details and save in database
         if (page.equalsIgnoreCase("editCandidateDetails")) {
             int id = Integer.parseInt(request.getParameter("canId"));
             Candidate candidate = new Candidate();
@@ -466,7 +469,7 @@ public class HelloServlet extends HttpServlet {
             Part file = request.getPart("profileCandidate");
             String imageFileName = file.getSubmittedFileName();
 
-            String uploadPath = "C://Users//DELL//IdeaProjects//VotingSystem//src//main//webapp//candidateProfile//" + imageFileName;
+            String uploadPath = "C://Users//Acer//IdeaProjects//VotingSystem//src//main//webapp//candidateProfile//" + imageFileName;
 
             try{
                 FileOutputStream fileOutputStream = new FileOutputStream(uploadPath);
@@ -586,7 +589,6 @@ public class HelloServlet extends HttpServlet {
             requestDispatcher.forward(request, response);
         }
 
-
         //exit candidate profile
         if (page.equalsIgnoreCase("cancelAdmin")) {
             Candidate candidate = new Candidate();
@@ -644,7 +646,7 @@ public class HelloServlet extends HttpServlet {
             requestDispatcher.forward(request, response);
         }
 
-        //open candidate list from user
+        //see more details about the election
         if (page.equalsIgnoreCase("seeElec")) {
             int totalVoters = new VotingService().totalVoters();
             request.setAttribute("totalVoters", totalVoters);
@@ -740,6 +742,7 @@ public class HelloServlet extends HttpServlet {
             requestDispatcher.forward(request, response);
         }
 
+        //for editing details of user
         if (page.equalsIgnoreCase("editUserDetails")) {
             int id = Integer.parseInt(request.getParameter("id"));
             VotingSystem vs = new VotingSystem();
@@ -747,7 +750,7 @@ public class HelloServlet extends HttpServlet {
             Part file = request.getPart("newUserPro");
             String imageFileName = file.getSubmittedFileName();
 
-            String uploadPath = "C://Users//DELL//IdeaProjects//VotingSystem//src//main//webapp//userProfile//" + imageFileName;
+            String uploadPath = "C://Users//Acer//IdeaProjects//VotingSystem//src//main//webapp//userProfile//" + imageFileName;
 
             try{
                 FileOutputStream fileOutputStream = new FileOutputStream(uploadPath);
@@ -814,13 +817,17 @@ public class HelloServlet extends HttpServlet {
             requestDispatcher.forward(request, response);
         }
 
+        //to vote the candidate
         if(page.equalsIgnoreCase("voteCandidate")){
             int id = Integer.parseInt(request.getParameter("canId"));
             int totalVoters = new VotingService().totalVoters();
             request.setAttribute("totalVoters", totalVoters);
 
+            HttpSession session = request.getSession();
+            int userId = (int) session.getAttribute("id");
+
             // Check if the user has already voted
-            if (new VotingService().userHasVoted(request.getRemoteAddr())) {
+            if (new VotingService().userHasVoted(request.getRemoteAddr(), userId)) {
                 // If the user has already voted, display an error message
                 request.setAttribute("errorMessage", "Sorry! You have already voted.");
                 Candidate candidate = new Candidate();
@@ -836,6 +843,7 @@ public class HelloServlet extends HttpServlet {
                 Vote vote = new Vote();
 
                 vote.setSessionId(request.getRemoteAddr());
+                vote.setUserId(userId);
                 vote.setCandidateId(id);
 
                 // executing query with the value generated by form
@@ -886,13 +894,11 @@ public class HelloServlet extends HttpServlet {
             requestDispatcher.forward(request, response);
         }
 
-        //terms
+        //terms and conditions
         if (page.equalsIgnoreCase("terms")){
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("terms.jsp");
             requestDispatcher.forward(request, response);
         }
-
-
 
     }
 

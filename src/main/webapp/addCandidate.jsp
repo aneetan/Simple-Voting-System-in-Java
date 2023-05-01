@@ -19,6 +19,22 @@
     <link rel="stylesheet" href="css/admin.css" />
 
     <title> Add Candidate</title>
+
+    <style>
+        .container form{
+            position: relative;
+            margin-top: 10px;
+            min-height: 610px;
+            background-color: #fff;
+            width: 90%;
+            padding: 2rem;
+            overflow: hidden;
+        }
+        .container form .fields{
+            display: flex;
+            align-items: center;
+        }
+    </style>
 </head>
 <body>
 <%@ include file="essentials/sidebar.jsp"%>
@@ -83,11 +99,7 @@
                                     <label>Specify Candidacy</label>
                                         <input name="candidate" type="text" placeholder="Eg. Mayor" required>
 
-                                <%--                                    <select name="candidate" required>--%>
-<%--                                        <option disabled selected>Specify</option>--%>
-<%--                                        <option value="Semester II(A)">Semester II(A)</option>--%>
-<%--                                        <option value="Semester II(B)">Semester II(B)</option>--%>
-<%--                                    </select>--%>
+
                                 </div>
                             </div>
                         </div>

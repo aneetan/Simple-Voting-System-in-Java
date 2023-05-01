@@ -20,6 +20,21 @@
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
 
     <title> Authorize Form</title>
+    <style>
+        input[type=password]:focus,
+        input[type=password]::placeholder{
+            color: #232323;
+        }
+        input[type=email]:focus,
+        input[type=email]::placeholder{
+            color: #232323;
+        }
+        input[type=date]:focus,
+        input[type=date]::placeholder{
+            color: #232323;
+        }
+
+    </style>
 </head>
 
 <body style="background-image:linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(15, 71, 193, 0.73)),
