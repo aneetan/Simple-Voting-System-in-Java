@@ -16,7 +16,7 @@ form.addEventListener('submit', function(e){
 });
 
 //error message
-const setError =(element, message) => {
+const setError = (element, message) => {
     const inputControl = element.parentElement;
     const errorDisplay = inputControl.querySelector('.error');
 
@@ -66,7 +66,6 @@ const validateInputs = () => {
     const confirmpwValue = confirmpw.value.trim();
     let isValid = true;
 
-
     //check email validation
     if(emailValue === '') {
         setError(email, 'Email is required');
@@ -86,30 +85,30 @@ const validateInputs = () => {
         if(isAbove18(dobValue) === false){
             setError(DOB, "Sorry you don't have access to this system");
             isValid=false;
-        } else{
+        } else {
             setSuccess(DOB);
         }
     }
 
     //check password validation
-    if(passwordValue === ''){
+    if(passwordValue === '') {
         setError(password, 'Password is required');
         isValid=false;
-    } else if(passwordValue.length < 7){
+    } else if(passwordValue.length < 7) {
         setError(password,'Password must be 7 characters');
         isValid=false;
-    }else if (!isValidPassword(passwordValue)){
+    } else if (!isValidPassword(passwordValue)) {
         setError(password,'Please insert strong password');
         isValid=false;
-    }  else {
+    } else {
         setSuccess(password);
     }
 
     //check for matching password
-    if(confirmpwValue === ''){
+    if(confirmpwValue === '') {
         setError(confirmpw, 'Please confirm your password');
         isValid=false;
-    } else if(confirmpwValue !== passwordValue){
+    } else if(confirmpwValue !== passwordValue) {
         setError(confirmpw, "Password doesn't match");
         isValid=false;
     } else {

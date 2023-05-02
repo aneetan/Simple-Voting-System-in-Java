@@ -38,14 +38,6 @@
 <body>
 <%@ include file="essentials/nav.jsp"%>
 
-<%--<% if (request.getAttribute("errorMessage") != null) { %>--%>
-<%--&lt;%&ndash;<div class="error" style="color: #ff3860; margin-top: 98px; font-size: 18px; font-weight:400;" id="error-message"><%= request.getAttribute("errorMessage") %></div>&ndash;%&gt;--%>
-<%--<script>--%>
-<%--    // Show an alert popup when the error message is displayed--%>
-<%--    alert("<%= request.getAttribute("errorMessage") %>");--%>
-<%--</script>--%>
-<%--<% } %>--%>
-
     <div class="profile-area" style="margin: 8px 20px 0 10px; padding-top: 85px">
       <div class="containerCard" style="margin: 2px 20px 0 50px">
         <div class="row">

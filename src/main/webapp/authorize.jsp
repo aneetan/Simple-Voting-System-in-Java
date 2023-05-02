@@ -55,21 +55,21 @@
                 <input type="file" id="userProfile" class="img-file" name="userProfile">
             </div>
             <div class="details personal">
-                <span class="title">Personal Details</span>
+                <span class="title"> Personal Details </span>
 
                 <div class="fields">
                     <div class="input-field">
-                        <label> Full Name</label>
+                        <label> Full Name </label>
                         <input id="name" name="fullName" type="text" placeholder="Enter full name" required>
                     </div>
 
                     <div class="input-field">
-                        <label>Address</label>
+                        <label> Address </label>
                         <input id="address" name="address" type="text" placeholder="Enter address">
                     </div>
 
                     <div class="input-field">
-                        <label>Gender</label>
+                        <label> Gender </label>
                         <select name="gender" required>
                             <option disabled selected>Select gender</option>
                             <option>Male</option>
@@ -81,22 +81,21 @@
             </div>
 
             <div class="details ID">
-                <span class="title">Identity Details</span>
+                <span class="title"> Identity Details </span>
 
                 <div class="fields">
-
                     <div class="input-field">
-                        <label>Citizenship Number</label>
+                        <label> Citizenship Number </label>
                         <input id="idNum" name="citizenNo" type="tel" placeholder="Enter Citizenship number" required>
                     </div>
 
                     <div class="input-field">
-                        <label>Issued District</label>
+                        <label> Issued District </label>
                         <input id="idDistrict" name="issueDistrict" type="text" placeholder="Enter issued district" required>
                     </div>
 
                     <div class="input-field">
-                        <label>Issued Date</label>
+                        <label> Issued Date </label>
                         <input id="idDate" type="date" name="issueDate" placeholder="Enter your issued date" required>
                     </div>
 

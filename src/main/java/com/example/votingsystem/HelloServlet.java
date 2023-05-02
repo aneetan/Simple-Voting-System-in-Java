@@ -603,7 +603,9 @@ public class HelloServlet extends HttpServlet {
         //logout admin
         if (page.equalsIgnoreCase("logoutAdmin")) {
             HttpSession session = request.getSession(false);
-            session.invalidate();
+            if(session != null) {
+                session.invalidate();
+            }
 //            Current session return if not available new session in true
 //            Current session return if not available return null in false
 
@@ -705,9 +707,13 @@ public class HelloServlet extends HttpServlet {
             String oldPw = PasswordHashing.hashPassword(request.getParameter("oldPassword"));
 
             VotingSystem votingSystem = new VotingService().changePw(id, oldPw);
-            request.getSession().setAttribute("votingSystem", votingSystem);
+            new VotingService().changePw(id, oldPw);
+//            request.getSession().setAttribute("votingSystem", votingSystem);
 
             if (votingSystem != null) {
+                votingSystem = new VotingService().userDetails(id);
+                request.setAttribute("votingSystem", votingSystem);
+
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("changePw.jsp");
                 requestDispatcher.forward(request, response);
             } else {
@@ -820,16 +826,18 @@ public class HelloServlet extends HttpServlet {
         //to vote the candidate
         if(page.equalsIgnoreCase("voteCandidate")){
             int id = Integer.parseInt(request.getParameter("canId"));
-            int totalVoters = new VotingService().totalVoters();
-            request.setAttribute("totalVoters", totalVoters);
+
 
             HttpSession session = request.getSession();
             int userId = (int) session.getAttribute("id");
 
             // Check if the user has already voted
             if (new VotingService().userHasVoted(request.getRemoteAddr(), userId)) {
+                int totalVoters = new VotingService().totalVoters();
+                request.setAttribute("totalVoters", totalVoters);
                 // If the user has already voted, display an error message
                 request.setAttribute("errorMessage", "Sorry! You have already voted.");
+
                 Candidate candidate = new Candidate();
 
                 List<Candidate> candidateList = new VotingService().getCandidateList();   //returned in list
@@ -838,8 +846,13 @@ public class HelloServlet extends HttpServlet {
 
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("candidateCard.jsp");
                 requestDispatcher.forward(request, response);
+
+
             } else {
                 // If the user has not already voted, store their vote in the database
+                int totalVoters = new VotingService().totalVoters();
+                request.setAttribute("totalVoters", totalVoters);
+
                 Vote vote = new Vote();
 
                 vote.setSessionId(request.getRemoteAddr());
@@ -850,24 +863,32 @@ public class HelloServlet extends HttpServlet {
                 new VotingService().insertVote(vote);
                 new VotingService().getVotes(id);
 
-                Candidate candidate = new Candidate();
+//                int id = Integer.parseInt(request.getParameter("canId"));
+                Candidate candidate = new VotingService().candidateDetails(id);
 
-                List<Candidate> candidateList = new VotingService().getCandidateList();   //returned in list
                 request.setAttribute("candidate", candidate);
-                request.setAttribute("candidateList", candidateList);
 
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("candidateCard.jsp");
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("candidateProfile.jsp");
                 requestDispatcher.forward(request, response);
+
+//                Candidate candidate = new Candidate();
+//
+//                List<Candidate> candidateList = new VotingService().getCandidateList();   //returned in list
+//                request.setAttribute("candidate", candidate);
+//                request.setAttribute("candidateList", candidateList);
+//
+//                RequestDispatcher requestDispatcher = request.getRequestDispatcher("candidateCard.jsp");
+//                requestDispatcher.forward(request, response);
             }
 
-            Candidate candidate = new Candidate();
-
-            List<Candidate> candidateList = new VotingService().getCandidateList();   //returned in list
-            request.setAttribute("candidate", candidate);
-            request.setAttribute("candidateList", candidateList);
-
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("candidateCard.jsp");
-            requestDispatcher.forward(request, response);
+//            Candidate candidate = new Candidate();
+//
+//            List<Candidate> candidateList = new VotingService().getCandidateList();   //returned in list
+//            request.setAttribute("candidate", candidate);
+//            request.setAttribute("candidateList", candidateList);
+//
+//            RequestDispatcher requestDispatcher = request.getRequestDispatcher("candidateCard.jsp");
+//            requestDispatcher.forward(request, response);
         }
 
         //exit details of candidate profile
@@ -888,10 +909,20 @@ public class HelloServlet extends HttpServlet {
         //logout user
         if (page.equalsIgnoreCase("logoutUser")) {
             HttpSession session = request.getSession(false);
-            session.invalidate();
+//            if(session != null) {
+                session.invalidate();
+//            }
 
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
-            requestDispatcher.forward(request, response);
+            // remove the JSESSIONID cookie from the response
+            Cookie sessionCookie = new Cookie("JSESSIONID", null);
+            sessionCookie.setPath(request.getContextPath());
+            sessionCookie.setMaxAge(0);
+            response.addCookie(sessionCookie);
+
+            response.sendRedirect(request.getContextPath() + "/index.jsp");
+
+//            RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
+//            requestDispatcher.forward(request, response);
         }
 
         //terms and conditions

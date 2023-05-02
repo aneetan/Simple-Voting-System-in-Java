@@ -42,7 +42,7 @@
               <hr>
               <a href="vote?page=changePw&id=${votingSystem.id}"> Change Password </a>
               <hr>
-              <a href="vote?page=logoutUser&id=${votingSystem.id}"> Log Out </a>
+              <a href="vote?page=logoutUser"> Log Out </a>
               <hr>
 
 

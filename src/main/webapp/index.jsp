@@ -13,6 +13,11 @@
             color: #232323;
         }
 
+        .btn.solid:active {
+            background-color: white;
+        }
+
+
     </style>
 </head>
 <body>
